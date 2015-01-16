@@ -1,0 +1,6 @@
+用户列表(密码：000000)
+用户名	角色
+admin	管理员、用户
+kafeitu	用户
+hruser	人事、用户
+leaderuser	部门经理、用户
