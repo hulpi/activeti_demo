@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<%@ include file="/common/global.jsp"%>
-	<title>请假已结束的流程实例列表</title>
+	<title>申请已结束的流程实例列表</title>
 	<%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
     <%@ include file="/common/include-jquery-ui-theme.jsp" %>
@@ -25,13 +25,11 @@
 	<table width="100%" class="need-border">
 		<thead>
 			<tr>
-				<th>假种</th>
-				<th>申请人</th>
+			    <th>申请人</th>
 				<th>申请时间</th>
-				<th>开始时间</th>
-				<th>结束时间</th>
-				<th><b>实际</b>开<br/>始时间</th>
-				<th><b>实际</b>结<br/>束时间</th>
+				<th>客户名字</th>
+				<th>证件类型</th>
+				<th>证件号码</th>
 				<th>流程启动时间</th>
 				<th>流程结束时间</th>
 				<th>流程结束原因</th>
@@ -39,20 +37,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${page.result }" var="leave">
-				<c:set var="hpi" value="${leave.historicProcessInstance }" />
+			<c:forEach items="${page.result }" var="application">
+				<c:set var="hpi" value="${application.historicProcessInstance }" />
 				<tr id="${leave.id }" tid="${task.id }">
-					<td>${leave.leaveType }</td>
-					<td>${leave.userId }</td>
-					<td>${leave.applyTime }</td>
-					<td>${leave.startTime }</td>
-					<td>${leave.applyTime }</td>
-					<td>${leave.realityStartTime }</td>
-					<td>${leave.realityEndTime }</td>
+					<td>${name.userId }</td>
+					<td>${name.applyTime }</td>
+					<td>${application.name }</td>
+					<td>${application.idType }</td>
+					<td>${application.idNo }</td>
 					<td>${hpi.startTime }</td>
 					<td>${hpi.endTime }</td>
 					<td>${hpi.deleteReason }</td>
-					<td><b title='流程版本号'>V: ${leave.processDefinition.version }</b></td>
+					<td><b title='流程版本号'>V: ${application.processDefinition.version }</b></td>
 				</tr>
 			</c:forEach>
 		</tbody>

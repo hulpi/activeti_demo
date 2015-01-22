@@ -1,10 +1,8 @@
 package me.kafeitu.demo.activiti.web.customer;
 
 import me.kafeitu.demo.activiti.entity.customer.Application;
-import me.kafeitu.demo.activiti.entity.oa.Leave;
+import me.kafeitu.demo.activiti.service.apply.ApplicationManager;
 import me.kafeitu.demo.activiti.service.apply.ApplyWorkflowService;
-import me.kafeitu.demo.activiti.service.oa.leave.LeaveManager;
-import me.kafeitu.demo.activiti.service.oa.leave.LeaveWorkflowService;
 import me.kafeitu.demo.activiti.util.Page;
 import me.kafeitu.demo.activiti.util.PageUtil;
 import me.kafeitu.demo.activiti.util.UserUtil;
@@ -45,7 +43,7 @@ public class ApplyController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    protected LeaveManager leaveManager;
+    protected ApplicationManager applicationManager;
 
     @Autowired
     protected ApplyWorkflowService workflowService;
@@ -136,7 +134,7 @@ public class ApplyController {
      */
     @RequestMapping(value = "list/finished")
     public ModelAndView finishedList(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("/oa/leave/finished");
+        ModelAndView mav = new ModelAndView("/customer/finished");
         Page<Application> page = new Page<Application>(PageUtil.PAGE_SIZE);
         int[] pageParams = PageUtil.init(page, request);
         workflowService.findFinishedProcessInstaces(page, pageParams);
@@ -163,9 +161,10 @@ public class ApplyController {
      */
     @RequestMapping(value = "detail/{id}")
     @ResponseBody
-    public Leave getLeave(@PathVariable("id") Long id) {
-        Leave leave = leaveManager.getLeave(id);
-        return leave;
+    public Application getApplication(@PathVariable("id") Long id) {
+        Application application = applicationManager.getApplication(id);
+        
+        return application;
     }
 
     /**
@@ -176,11 +175,12 @@ public class ApplyController {
      */
     @RequestMapping(value = "detail-with-vars/{id}/{taskId}")
     @ResponseBody
-    public Leave getLeaveWithVars(@PathVariable("id") Long id, @PathVariable("taskId") String taskId) {
-        Leave leave = leaveManager.getLeave(id);
+    public Application getLeaveWithVars(@PathVariable("id") Long id, @PathVariable("taskId") String taskId) {
+        Application application = applicationManager.getApplication(id);
         Map<String, Object> variables = taskService.getVariables(taskId);
-        leave.setVariables(variables);
-        return leave;
+        application.setVariables(variables);
+        
+        return application;
     }
 
     /**

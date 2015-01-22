@@ -6,23 +6,23 @@
 				<td name="userId"></td>
 			</tr>
 			<tr>
-				<td class="label">假种：</td>
-				<td name="leaveType"></td>
-			</tr>
-			<tr>
 				<td class="label">申请时间：</td>
 				<td name="applyTime"></td>
 			</tr>
 			<tr>
-				<td class="label">请假<font color="red">开始</font>时间：</td>
-				<td name="startTime"></td>
+				<td class="label">客户名字：</td>
+				<td name="name"></td>
 			</tr>
 			<tr>
-				<td class="label">请假<font color="red">结束</font>时间：</td>
-				<td name="endTime"></td>
+				<td class="label">证件类型：</td>
+				<td name="idType"></td>
 			</tr>
 			<tr>
-				<td class="label">请假事由：</td>
+				<td class="label">证件号码：</td>
+				<td name="idNo"></td>
+			</tr>
+			<tr>
+				<td class="label">备注：</td>
 				<td name="reason"></td>
 			</tr>
 		</table>

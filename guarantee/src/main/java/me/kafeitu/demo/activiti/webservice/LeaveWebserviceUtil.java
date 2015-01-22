@@ -3,6 +3,9 @@ package me.kafeitu.demo.activiti.webservice;
 import javax.xml.ws.Endpoint;
 
 import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 
 /**
  * 请假Webservice工具
@@ -25,15 +28,16 @@ public class LeaveWebserviceUtil {
             return;
         }
         LeaveWebService leaveWebService = new LeaveWebServiceImpl();
-        /*JaxWsServerFactoryBean svrFactory = new JaxWsServerFactoryBean();
+        JaxWsServerFactoryBean svrFactory = new JaxWsServerFactoryBean();
         svrFactory.setServiceClass(LeaveWebService.class);
         svrFactory.setAddress(WEBSERVICE_URL);
         svrFactory.setServiceBean(leaveWebService);
         svrFactory.getInInterceptors().add(new LoggingInInterceptor());
         svrFactory.getOutInterceptors().add(new LoggingOutInterceptor());
         server = svrFactory.create();
-        server.start();*/
-        Endpoint.publish(WEBSERVICE_URL, leaveWebService);
+        server.start();
+        
+        //Endpoint.publish(WEBSERVICE_URL, leaveWebService);
         System.out.println("请假Webservice已发布：" + WEBSERVICE_URL + "?wsdl");
     }
 

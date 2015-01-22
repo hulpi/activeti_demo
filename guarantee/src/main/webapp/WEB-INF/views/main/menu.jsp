@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <ul id="css3menu">
 	<li class="topfirst"><a rel="main/welcome">首页</a></li>
-	<!-- <li>
+	 <li>
 		<a rel="#">请假（普通表单）</a>
 		<ul>
 			<li><a rel="oa/leave/apply">请假申请(普通)</a></li>
@@ -9,7 +9,7 @@
 			<li><a rel="oa/leave/list/running">运行中流程(普通)</a></li>
 			<li><a rel="oa/leave/list/finished">已结束流程(普通)</a></li>
 		</ul>
-	</li>-->
+	</li>
 	<li>
 		<a rel="#">担保受理</a>
 		<ul>
@@ -17,7 +17,7 @@
 			<li><a rel="customer/apply/initialize">担保申请</a></li>
 			 <li><a rel="customer/apply/list/task">客户初审</a></li>
 			 <li><a rel="customer/apply/list/running">运行中流程(普通)</a></li>
-			<li><a rel="customer/apply/finished">已结束流程(普通)</a></li>
+			<li><a rel="customer/apply/list/finished">已结束流程(普通)</a></li>
 		</ul>
 	</li>
 	

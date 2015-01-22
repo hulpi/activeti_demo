@@ -31,7 +31,8 @@ public class LeaveWebServiceImpl implements LeaveWebService {
 
     @Override
     public boolean generalManagerAudit(XMLGregorianCalendar startDate, XMLGregorianCalendar endDate) throws Exception {
-        Date innerStartDate = startDate.toGregorianCalendar().getTime();
+    	logger.info("generalManagerAudit#start...");
+    	Date innerStartDate = startDate.toGregorianCalendar().getTime();
         Date innerEndDate = endDate.toGregorianCalendar().getTime();
         int days = daysBetween(innerStartDate, innerEndDate);
         return days > 3 ? true : false;

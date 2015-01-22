@@ -40,6 +40,7 @@ public class AfterModifyApplyContentProcessor implements TaskListener {
         leave.setStartTime((Date) delegateTask.getVariable("startTime"));
         leave.setEndTime((Date) delegateTask.getVariable("endTime"));
         leave.setReason((String) delegateTask.getVariable("reason"));
+        
 
         leaveManager.saveLeave(leave);
     }

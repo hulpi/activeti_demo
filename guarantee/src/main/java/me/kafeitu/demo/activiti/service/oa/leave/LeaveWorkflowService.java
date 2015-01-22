@@ -96,10 +96,12 @@ public class LeaveWorkflowService {
                 continue;
             }
             Leave leave = leaveManager.getLeave(new Long(businessKey));
-            leave.setTask(task);
-            leave.setProcessInstance(processInstance);
-            leave.setProcessDefinition(getProcessDefinition(processInstance.getProcessDefinitionId()));
-            results.add(leave);
+            if(leave!=null) {
+	            leave.setTask(task);
+	            leave.setProcessInstance(processInstance);
+	            leave.setProcessDefinition(getProcessDefinition(processInstance.getProcessDefinitionId()));
+	            results.add(leave);
+            }
         }
 
         page.setTotalCount(taskQuery.count());

@@ -29,7 +29,7 @@
 	<script src="${ctx }/js/common/plugins/html/jquery.outerhtml.js" type="text/javascript"></script>
 	<script src="${ctx }/js/common/plugins/blockui/jquery.blockUI.js" type="text/javascript"></script>
 	<script src="${ctx }/js/module/activiti/workflow.js" type="text/javascript"></script>
-	<script src="${ctx }/js/module/oa/leave/leave-todo.js" type="text/javascript"></script>
+	<script src="${ctx }/js/module/customer/application-todo.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -91,12 +91,54 @@
 		<!-- table用来显示信息，方便办理任务 -->
 		<%@include file="view-form.jsp" %>
 	</div>
+	
+	<!-- 初审 -->
+	<div id="usertask1" style="display: none">
+
+		<!-- table用来显示信息，方便办理任务 -->
+		<%@include file="view-form.jsp" %>
+	</div>
 
 	<!-- HR审批 -->
 	<div id="hrAudit" style="display: none">
 
 		<!-- table用来显示信息，方便办理任务 -->
 		<%@include file="view-form.jsp" %>
+	</div>
+	<div id="usertask2" style="display: none">
+
+		<!-- table用来显示信息，方便办理任务 -->
+		<%@include file="view-form.jsp" %>
+	</div>
+	
+	<div id="usertask3" style="display: none">
+		<div class="info" style="display: none"></div>
+		<div id="radio">
+			<input type="radio" id="radio1" name="reApply" value="true" /><label for="radio1">调整申请</label>
+			<input type="radio" id="radio2" name="reApply" checked="checked" value="false" /><label for="radio2">取消申请</label>
+		</div>
+		<hr />
+		<table id="applyContent" style="display: none">
+			<caption>调整申请内容</caption>
+			<tr>
+				<td>证件类型：</td>
+				<td>
+					<select id="idType" name="idType">
+						<option>身份证</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>证件号码：</td>
+				<td><input type="text" id="idNo" name="idNo" /></td>
+			</tr>
+			<tr>
+				<td>原因：</td>
+				<td>
+					<textarea id="reason" name="reason" style="width: 250px;height: 50px"></textarea>
+				</td>
+			</tr>
+		</table>
 	</div>
 
 	<div id="modifyApply" style="display: none">

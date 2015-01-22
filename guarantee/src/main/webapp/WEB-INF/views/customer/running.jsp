@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<%@ include file="/common/global.jsp"%>
-	<title>请假正在运行中的流程实例列表</title>
+	<title>申请正在运行中的流程实例列表</title>
 	<%@ include file="/common/meta.jsp" %>
     <%@ include file="/common/include-base-styles.jsp" %>
     <%@ include file="/common/include-jquery-ui-theme.jsp" %>
@@ -31,11 +31,11 @@
 	<table width="100%" class="need-border">
 		<thead>
 			<tr>
-				<th>假种</th>
-				<th>申请人</th>
+			    <th>申请人</th>
 				<th>申请时间</th>
-				<th>开始时间</th>
-				<th>结束时间</th>
+				<th>客户名字</th>
+				<th>证件类型</th>
+				<th>证件号码</th>
 				<th>当前节点</th>
 				<th>任务创建时间</th>
 				<th>流程状态</th>
@@ -43,15 +43,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${page.result }" var="leave">
-				<c:set var="task" value="${leave.task }" />
-				<c:set var="pi" value="${leave.processInstance }" />
-				<tr id="${leave.id }" tid="${task.id }">
-					<td>${leave.leaveType }</td>
-					<td>${leave.userId }</td>
-					<td>${leave.applyTime }</td>
-					<td>${leave.startTime }</td>
-					<td>${leave.endTime }</td>
+			<c:forEach items="${page.result }" var="application">
+				<c:set var="task" value="${application.task }" />
+				<c:set var="pi" value="${application.processInstance }" />
+				<tr id="${application.id }" tid="${task.id }">
+					<td>${name.userId }</td>
+					<td>${name.applyTime }</td>
+					<td>${application.name }</td>
+					<td>${application.idType }</td>
+					<td>${application.idNo }</td>
 					<td>
 						<a class="trace" href='#' pid="${pi.id }" pdid="${pi.processDefinitionId}" title="点击查看流程图">${task.name }</a>
 					</td>
