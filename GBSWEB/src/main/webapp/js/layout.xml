@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layout>
+	<title>融资担保系统</title>
+	<!-- 外部加载类：必须实现com.sunyard.ui.proxy.Validate接口，主要实现三个方法：登录验证，获取用户权限，获取公告信息 -->
+	<validate>com.uaf.ui.view.ValidateModule</validate>
+	<!-- 横排按钮、菜单栏配置 
+	expand(目前只支持一种方式):按钮区布局方式{false:不展开按钮，菜单栏方式[默认值,推荐！]，true:自动展开按钮，横排经典布局方式[之前常用的方式,不推荐!]}-->
+	<menus name="业务岗位列表" expand="false">
+		<butten id="1003" name="贷款申请" url="../tasklist/dksqTaskList.jsp"></butten>
+		<butten id="1004" name="贷款审核" url="../tasklist/dkshTaskList.jsp"></butten>
+		<butten id="1005" name="贷款审批" url="../tasklist/dkspTaskList.jsp"></butten>
+		<butten id="1006" name="贷款发放" url="../tasklist/dkffTaskList.jsp"></butten>
+	</menus>
+	<!-- 导航区树形菜单配置 -->
+	<trees>
+		<tree name="1.通用功能">
+ 
+ 			<leaf id="1062" name="样式页面" url="./basic.jsp"/>
+ 			
+			<folder name="业务受理">
+			<leaf id="1062" name="1. 个人申请资料" url="./loanApply/individualApply.jsp"/>
+			<leaf id="1063" name="2. 企业申请资料" url="./loanApply/enterpraiseApply.jsp"/>
+						<leaf id="1056" name="3. 担保申请" url="loanApply/apply_info.jsp" />
+			<leaf id="1056" name="4. 申请管理" url="getApplyList.do" /> 
+			</folder>
+			 
+			<folder name="待办事项">
+						<leaf id="1073" name="1. 担保初审" url="approval/task?action=check" />
+						<leaf id="1074" name="2. 担保审核" url="approval/task?action=audit" />
+						<leaf id="1075" name="3. 担保审批" url="approval/task?action=approve" />
+						<leaf id="1076" name="4. 高级审批" url="approval/task?action=advanceApprove" />
+						<leaf id="1077" name="5. 退回申请" url="approval/task?action=back" />
+			</folder>
+		</tree>	
+	</trees>
+</layout>

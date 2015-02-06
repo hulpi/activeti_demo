@@ -1,0 +1,134 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="js/jquery-1.8.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="themes/icon.css">
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/Popup.js"></script>
+<script type="text/javascript" src="js/Verification.js"></script>
+</head>
+<body>
+	<h2>弹出框 测试页面</h2>
+	<div style="margin: 20px 0;">
+		<a href="#" class="easyui-linkbutton" onclick="confirm1();">Confirm</a>
+		 <a href="#" class="easyui-linkbutton" onclick="alert2()">Error</a> <a
+			href="#" class="easyui-linkbutton" onclick="alert3()">Succ</a> <a
+			href="#" class="easyui-linkbutton" onclick="alert4()">openHTML</a>
+	</div>
+	<div class="easyui-panel titles" title="新增、修改 --用这种CSS">
+		<div class="titleb">
+
+			<div class="divLeft">Email:</div>
+			<div class="divRight">
+				<input reg="[^S]" type="text">
+			</div>
+		</div>
+
+		<div class="titleb">
+			<div class="divLeft">First Name:</div>
+			<div class="divRight">
+				<input type="text">
+			</div>
+		</div>
+		<div class="titleb">
+			<div class="divLeft">Last Name:</div>
+			<div class="divRight">
+				<input type="text">
+			</div>
+		</div>
+		<div class="titleb">
+			<div class="divLeft">Company:</div>
+			<div class="divRight">
+				<input type="text">
+			</div>
+		</div>
+        		<div class="titleb">
+			<div class="divLeft">Company:</div>
+			<div class="divRight">
+				<textarea style="width:300px;"  rows="5"></textarea>
+			</div>
+		</div>
+		<div>
+			<div class="titleb">
+				<div class="divLeft">&nbsp;</div>
+				<div class="divRight">
+					<a href="#" class="easyui-linkbutton" iconCls="icon-ok">Register</a>
+				</div>
+			</div>
+		</div>
+	</div>
+<div class="divs">
+<div class="divsui">
+<ul>
+<li>用户名:<input type="text"></li>
+<li>身份证:<input type="text"></li>
+<li>身份证:<select class="easyui-combobox" name="language"><option value="ar">Arabic</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="zh-cht">Chinese Traditional</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="en" selected="selected">English</option><option value="et">Estonian</option><option value="fi">Finnish</option><option value="fr">French</option><option value="de">German</option><option value="el">Greek</option><option value="ht">Haitian Creole</option><option value="he">Hebrew</option><option value="hi">Hindi</option><option value="mww">Hmong Daw</option><option value="hu">Hungarian</option></select></li>
+<li style="width:10%"><a href="#" class="easyui-linkbutton" iconCls="icon-ok">查询</a>
+<a href="#" class="easyui-linkbutton">取消</a>
+</li>
+</ul>
+</div>
+	<table width="100%" class="tables" border="0" align="center" cellpadding="5" cellspacing="1">
+		<thead>
+			<tr class="tits">
+				<th>Item ID</th>
+				<th>Product</th>
+				<th>ListPrice</th>
+				<th>UnitCost</th>
+				<th>Attribute</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="tr_cont">
+				<td>ewew</td>
+				<td>ewe</td>
+				<td>ListPrice</td>
+				<td>ewe</td>
+				<td>Attasribute</td>
+				<td>sa</td>
+			</tr>
+			<tr class="tr_cont2">
+				<td>ewe</td>
+				<td>Product</td>
+				<td>ListPr23ice</td>
+				<td>UnitCo323st</td>
+				<td>Attwqribute</td>
+				<td>Statwqus</td>
+			</tr>
+		</tbody>
+	</table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$("#loadingdivs", parent.document).hide();
+		$.messager.defaults = {
+			ok : "确定",
+			cancel : "取消"
+		};
+
+	});
+
+	function confirm1() {
+		confirms(function() {
+			alert('确定')
+		})
+	}
+	function alert2() {
+		jqalertly('Here is a message!');
+	}
+	function alert3() {
+		jqalertly('Here is a message!', 1);
+	}
+	function alert4() {
+		jqopenly('弹出一个页面', 'basic.jsp');
+	}
+</script>

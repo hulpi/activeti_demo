@@ -1,0 +1,45 @@
+/*设置网页正文字体*/
+table
+	{
+	
+		font-size:12px;
+	
+	}
+设置fieldset标题字体
+legend {
+		font-size: 9px;
+
+}
+
+.star_color{
+
+		color:#EA0000;
+}
+
+select {
+		width:155px;
+}
+/*
+.ts_css{
+		color:blue;
+}*/
+
+
+.input_css{
+		
+}
+
+table,tr,td,th {
+		font-size:12px;
+		align: right;
+}
+/*
+th{
+  		color:blue;
+		font-weight:bold;
+  		}
+
+.th_css{
+		color:blue;
+}*/
+

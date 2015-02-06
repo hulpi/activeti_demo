@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:security="http://www.springframework.org/schema/security"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+            http://www.springframework.org/schema/beans/spring-beans-4.1.xsd  
+            http://www.springframework.org/schema/security   
+            http://www.springframework.org/schema/security/spring-security-3.2.xsd">  
+ 
+    <security:http pattern="/css/**" security="none"/>
+    <security:http pattern="/js/**" security="none"/>
+    <security:http pattern="/themes/**" security="none"/>
+    <security:http pattern="/themes/default/**" security="none"/>
+    <security:http pattern="/themes/icons/**" security="none"/>
+    <security:http pattern="/images/**" security="none"/>
+    <security:http pattern="/ECMoperate/css/**" security="none"/>
+    <security:http pattern="/ECMoperate/js/**" security="none"/>
+    <security:http pattern="/login.jsp" security="none"/>
+
+    <security:http auto-config="true" use-expressions="false" access-denied-page="/failure.jsp">  
+
+        <!--     <security:intercept-url pattern="/**" access="permitAll" />-->
+        <security:intercept-url pattern="/index.jsp" access="ROLE_USER,ROLE_ADMIN" />
+        <security:intercept-url pattern="/loanApply/**" access="ROLE_USER,ROLE_ADMIN" />
+        <security:intercept-url pattern="/approval/**" access="ROLE_USER,ROLE_ADMIN" />
+        <security:intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY" />  
+        <security:form-login login-page="/login.jsp" authentication-failure-url="/failure.jsp"
+            default-target-url="/index.jsp" />
+
+        <security:logout invalidate-session="true" logout-success-url="/login.jsp" logout-url="/j_spring_security_logout" />
+  
+        <security:session-management>
+            <security:concurrency-control error-if-maximum-exceeded="false" max-sessions="10" />
+        </security:session-management>
+  
+    </security:http>  
+
+
+    <security:authentication-manager>  
+        <security:authentication-provider user-service-ref="customUserDetailsService"/>  
+            <!-- <security:password-encoder ref="passwordEncoder" />  
+        </security:authentication-provider>  -->
+    </security:authentication-manager>  
+   
+    <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />  
+
+    <bean id="customUserDetailsService" class="com.gbs.service.impl.CustomUserDetailsServiceImpl" />  
+
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
+        <property name="basename" value="classpath:messages" />  
+    </bean>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+    
+</beans>  

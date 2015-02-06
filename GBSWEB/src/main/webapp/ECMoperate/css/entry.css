@@ -1,0 +1,24 @@
+
+FIELDSET{
+	margin:2px;
+	padding:2px;
+	
+}
+LEGEND{
+	color: #996600;
+	font-size: 13px;
+}
+
+TABLE{
+	font-size: 13px;
+	color: #000000;
+	font-family: "ËÎÌו";
+	text-align: left;
+}
+TH{
+	color:blue;
+	font-weight:bold;
+}
+input{
+	 cursor: expression(this.type=="button"?"pointer":"");
+}	
