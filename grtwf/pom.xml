@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.uaf.grtwf</groupId>
+  <name>workflow manager</name>
+  <artifactId>uaf-grtwf</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <properties>
+    <activiti-version>5.17.0</activiti-version>
+    <spring.framework.version>4.0.6.RELEASE</spring.framework.version>
+    <spring.security.version>3.2.3.RELEASE</spring.security.version>
+    <mule.version>3.5.0</mule.version>
+    <cxf.version>2.7.14</cxf.version>
+    <batik.version>1.7</batik.version>
+    <!-- JVM params for test execution -->
+    <argLine>-Duser.language=en</argLine>
+ 
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>vaadin-addons</id>
+      <url>http://maven.vaadin.com/vaadin-addons</url>
+    </repository>
+  </repositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.zeroturnaround</groupId>
+        <artifactId>jrebel-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-rebel-xml</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2.1</version>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/ui-jar.xml</descriptor>
+          </descriptors>
+        </configuration>
+      </plugin>
+
+      <plugin>
+	    <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+		<configuration>
+		  <port>8080</port>
+		  <path>/activiti-explorer</path>
+		  <systemProperties>
+		    <com.sun.management.jmxremote.port>4000</com.sun.management.jmxremote.port>
+          </systemProperties>
+		</configuration>
+      </plugin>
+      <!-- 
+      <plugin>
+	    <groupId>org.apache.cxf</groupId>
+	    <artifactId>cxf-codegen-plugin</artifactId>
+	    <version>${cxf.version}</version>
+	    <executions>
+	        <execution>
+	            <id>generate-sources</id>
+	            <phase>generate-sources</phase>
+	            <configuration>
+	                <sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
+	                <wsdlOptions>
+	                    <wsdlOption>
+	                        <wsdl>${basedir}/src/main/resources/approval.wsdl</wsdl>
+	                        <extraargs>
+			                    <extraarg>-client</extraarg>
+			                    <extraarg>-verbose</extraarg>
+			                </extraargs>
+	                    </wsdlOption>
+	                </wsdlOptions>
+	            </configuration>
+	            <goals>
+	                <goal>wsdl2java</goal>
+	            </goals>
+	        </execution>
+	    </executions>
+	  </plugin>-->
+      
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <!--This plugin's configuration is used to store Eclipse m2e settings 
+          only. It has no influence on the Maven build itself. -->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>
+                      org.zeroturnaround
+                    </groupId>
+                    <artifactId>
+                      jrebel-maven-plugin
+                    </artifactId>
+                    <versionRange>
+                      [1.0.7,)
+                    </versionRange>
+                    <goals>
+                      <goal>generate</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>compile-widgetset</id>
+      <build>
+        <plugins>
+          <!-- Compile custom GWT components or widget dependencies with 
+            the GWT compiler -->
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>gwt-maven-plugin</artifactId>
+            <version>2.3.0</version>
+            <configuration>
+              <webappDirectory>src/main/webapp/VAADIN/widgetsets</webappDirectory>
+              <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+              <runTarget>clean</runTarget>
+              <soyc>false</soyc>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>resources</goal>
+                  <goal>compile</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-maven-plugin</artifactId>
+            <version>1.0.2</version>
+            <executions>
+              <execution>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>update-widgetset</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+
+  <dependencies>
+
+    <!-- Activiti -->
+    <dependency>
+      <groupId>org.activiti</groupId>
+      <artifactId>activiti-engine</artifactId>
+       <version>${activiti-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.activiti</groupId>
+      <artifactId>activiti-spring</artifactId>
+      <version>${activiti-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.activiti</groupId>
+      <artifactId>activiti-explorer</artifactId>
+      <version>${activiti-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.activiti</groupId>
+      <artifactId>activiti-modeler</artifactId>
+      <version>${activiti-version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>xalan</groupId>
+          <artifactId>xalan</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.activiti</groupId>
+      <artifactId>activiti-diagram-rest</artifactId>
+      <version>${activiti-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.activiti</groupId>
+      <artifactId>activiti-simple-workflow</artifactId>
+      <version>${activiti-version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <!-- Spring -->
+     <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring.framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring.framework.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>commons-logging</artifactId>
+            <groupId>commons-logging</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>${spring.framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring.framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-orm</artifactId>
+        <version>${spring.framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring.framework.version}</version>
+      </dependency>
+      <dependency>
+      	<groupId>org.springframework</groupId>
+      	<artifactId>spring-context-support</artifactId>
+      	<version>${spring.framework.version}</version>
+	  </dependency>
+	  <dependency>
+      	<groupId>org.springframework</groupId>
+      	<artifactId>spring-web</artifactId>
+      	<version>${spring.framework.version}</version>
+      </dependency>
+      <dependency>
+      	<groupId>org.springframework</groupId>
+      	<artifactId>spring-webmvc</artifactId>
+      	<version>${spring.framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.framework.version}</version>
+      </dependency>
+      <dependency>
+      	<groupId>org.springframework.security</groupId>
+      	<artifactId>spring-security-core</artifactId>
+      	<version>${spring.security.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-config</artifactId>
+        <version>${spring.security.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-crypto</artifactId>
+        <version>${spring.security.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${spring.security.version}</version>
+      </dependency>
+      <!-- 
+      <dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-web</artifactId>
+		<version>${spring.boot.version}</version>
+	  </dependency>-->
+
+    <!-- Database -->
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+       <version>1.3.176</version>
+    </dependency>
+
+    <!-- Running example processes -->
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>2.1.3</version>
+    </dependency>
+
+    <!-- Testing -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-servlet</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+
+    <!-- Vaadin addons -->
+    <!-- Must be defined both in activiti-explorer and activiti-webapp-explorer, 
+      as otherwise the gwt compiler won't find it -->
+    <dependency>
+      <groupId>org.vaadin.addons</groupId>
+      <artifactId>dcharts-widget</artifactId>
+      <version>0.10.0</version>
+    </dependency>
+    
+    <!-- CXF -->
+    <dependency>
+	   <groupId>org.apache.cxf</groupId>
+	   <artifactId>cxf-api</artifactId>
+	   <version>${cxf.version}</version>
+	 </dependency>
+	 <dependency>
+	   <groupId>org.apache.cxf</groupId>
+	   <artifactId>cxf-rt-frontend-jaxws</artifactId>
+	   <version>${cxf.version}</version>
+	 </dependency>
+	 <dependency>
+	   <groupId>org.apache.cxf</groupId>
+	   <artifactId>cxf-rt-bindings-soap</artifactId>
+	   <version>${cxf.version}</version>
+	 </dependency>
+	 <dependency>
+	   <groupId>org.apache.cxf</groupId>
+	   <artifactId>cxf-rt-transports-http</artifactId>
+	   <version>${cxf.version}</version>
+	 </dependency>
+	 <dependency>
+	   <groupId>org.apache.cxf</groupId>
+	   <artifactId>cxf-rt-ws-security</artifactId>
+	   <version>${cxf.version}</version>
+	 </dependency>
+	 <dependency>
+          <groupId>org.apache.cxf</groupId>
+          <artifactId>cxf-rt-transports-http-jetty</artifactId>
+          <version>${cxf.version}</version>
+          <scope>test</scope>
+      </dependency>
+
+  </dependencies>
+</project>

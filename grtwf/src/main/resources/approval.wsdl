@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://webservice.grtwf.uaf.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ApprovalWebService" targetNamespace="http://webservice.grtwf.uaf.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://webservice.grtwf.uaf.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://webservice.grtwf.uaf.com/">
+  <xs:element name="claimTask" type="tns:claimTask"/>
+  <xs:element name="claimTaskResponse" type="tns:claimTaskResponse"/>
+  <xs:element name="completeTask" type="tns:completeTask"/>
+  <xs:element name="completeTaskResponse" type="tns:completeTaskResponse"/>
+  <xs:element name="findTodoTasks" type="tns:findTodoTasks"/>
+  <xs:element name="findTodoTasksResponse" type="tns:findTodoTasksResponse"/>
+  <xs:element name="getVariables" type="tns:getVariables"/>
+  <xs:element name="getVariablesResponse" type="tns:getVariablesResponse"/>
+  <xs:element name="startProcess" type="tns:startProcess"/>
+  <xs:element name="startProcessResponse" type="tns:startProcessResponse"/>
+  <xs:complexType name="claimTask">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="claimTaskResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getVariables">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getVariablesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:mapEntityArray"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="mapEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="key" type="xs:anyType"/>
+      <xs:element minOccurs="0" name="value" type="xs:anyType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="startProcess">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:mapEntityArray"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="startProcessResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="completeTask">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:mapEntityArray"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="completeTaskResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="findTodoTasks">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findTodoTasksResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:taskDto"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="taskDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="assignee" type="xs:string"/>
+      <xs:element minOccurs="0" name="businessKey" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="owner" type="xs:string"/>
+      <xs:element minOccurs="0" name="processDefinitionId" type="xs:string"/>
+      <xs:element minOccurs="0" name="processInstanceId" type="xs:string"/>
+      <xs:element minOccurs="0" name="taskDefinitionKey" type="xs:string"/>
+      <xs:element minOccurs="0" name="taskId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType final="#all" name="mapEntityArray">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="tns:mapEntity"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Exception" type="tns:Exception"/>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="startProcess">
+    <wsdl:part element="tns:startProcess" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="claimTaskResponse">
+    <wsdl:part element="tns:claimTaskResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVariablesResponse">
+    <wsdl:part element="tns:getVariablesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findTodoTasks">
+    <wsdl:part element="tns:findTodoTasks" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="startProcessResponse">
+    <wsdl:part element="tns:startProcessResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findTodoTasksResponse">
+    <wsdl:part element="tns:findTodoTasksResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="completeTask">
+    <wsdl:part element="tns:completeTask" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="completeTaskResponse">
+    <wsdl:part element="tns:completeTaskResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="claimTask">
+    <wsdl:part element="tns:claimTask" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVariables">
+    <wsdl:part element="tns:getVariables" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part element="tns:Exception" name="Exception">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ApprovalWebService">
+    <wsdl:operation name="claimTask">
+      <wsdl:input message="tns:claimTask" name="claimTask">
+    </wsdl:input>
+      <wsdl:output message="tns:claimTaskResponse" name="claimTaskResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVariables">
+      <wsdl:input message="tns:getVariables" name="getVariables">
+    </wsdl:input>
+      <wsdl:output message="tns:getVariablesResponse" name="getVariablesResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="startProcess">
+      <wsdl:input message="tns:startProcess" name="startProcess">
+    </wsdl:input>
+      <wsdl:output message="tns:startProcessResponse" name="startProcessResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="completeTask">
+      <wsdl:input message="tns:completeTask" name="completeTask">
+    </wsdl:input>
+      <wsdl:output message="tns:completeTaskResponse" name="completeTaskResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findTodoTasks">
+      <wsdl:input message="tns:findTodoTasks" name="findTodoTasks">
+    </wsdl:input>
+      <wsdl:output message="tns:findTodoTasksResponse" name="findTodoTasksResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ApprovalWebServiceSoapBinding" type="tns:ApprovalWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="claimTask">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="claimTask">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="claimTaskResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVariables">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getVariables">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getVariablesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="completeTask">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="completeTask">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="completeTaskResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="startProcess">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="startProcess">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="startProcessResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findTodoTasks">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findTodoTasks">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findTodoTasksResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ApprovalWebService">
+    <wsdl:port binding="tns:ApprovalWebServiceSoapBinding" name="ApprovalServicePort">
+      <soap:address location="http://10.168.96.43:8080/uaf-grtwf/webservices/approval"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

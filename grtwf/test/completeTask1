@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:completeTask>
+         <!--Optional:-->
+         <arg0>checker1</arg0>
+         <!--Optional:-->
+         <arg1>132522</arg1>
+         <!--Optional:-->
+         <arg2>
+            <!--Zero or more repetitions:-->
+            <item>
+               <key xsi:type="xs:string" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">hasPass</key>
+               <value xsi:type="xs:boolean" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">true</value>
+            </item>
+         </arg2>
+      </web:completeTask>
+   </soapenv:Body>
+</soapenv:Envelope>

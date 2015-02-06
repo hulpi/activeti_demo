@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:findTodoTasks>
+         <!--Optional:-->
+         <arg0>admin</arg0>
+      </web:findTodoTasks>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="activitiDemo" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="Port">8081</con:setting><con:setting id="Set endpoint for HTTP Tunnel:">http://localhost:8080/uaf-grtwf/webservices/approval?wsdl</con:setting><con:setting id="HTTP tunnel - KeyStore"/><con:setting id="HTTP tunnel - Password"/><con:setting id="HTTP tunnel - KeyPassword"/><con:setting id="HTTP tunnel - TrustStore"/><con:setting id="HTTP tunnel - TrustStore Password"/><con:setting id="Reuse request state">false</con:setting><con:setting id="HTTP tunnel - Set SSL Client Key Store path"/><con:setting id="Content types to monitor">*/html, */xml, */soap+xml, */json, */x-json, */javascript, */x-amf, */http</con:setting><con:setting id="HTTP tunnel - Set SSL Client Key Store Password"/></con:settings><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ApprovalWebServiceSoapBinding" type="wsdl" bindingName="{http://webservice.grtwf.uaf.com/}ApprovalWebServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:/D:/workspace_report/grtwf/test/approval.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/D:/workspace_report/grtwf/test/approval.xml"><con:part><con:url>file:/D:/workspace_report/grtwf/test/approval.xml</con:url><con:content><![CDATA[<wsdl:definitions name="ApprovalWebService" targetNamespace="http://webservice.grtwf.uaf.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://webservice.grtwf.uaf.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://webservice.grtwf.uaf.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="claimTask" type="tns:claimTask"/>
+      <xs:element name="claimTaskResponse" type="tns:claimTaskResponse"/>
+      <xs:element name="completeTask" type="tns:completeTask"/>
+      <xs:element name="completeTaskResponse" type="tns:completeTaskResponse"/>
+      <xs:element name="findTodoTasks" type="tns:findTodoTasks"/>
+      <xs:element name="findTodoTasksResponse" type="tns:findTodoTasksResponse"/>
+      <xs:element name="getVariables" type="tns:getVariables"/>
+      <xs:element name="getVariablesResponse" type="tns:getVariablesResponse"/>
+      <xs:element name="startProcess" type="tns:startProcess"/>
+      <xs:element name="startProcessResponse" type="tns:startProcessResponse"/>
+      <xs:complexType name="claimTask">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="claimTaskResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getVariables">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getVariablesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:mapEntityArray"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mapEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="key" type="xs:anyType"/>
+          <xs:element minOccurs="0" name="value" type="xs:anyType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="startProcess">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg2" type="tns:mapEntityArray"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="startProcessResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="completeTask">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg2" type="tns:mapEntityArray"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="completeTaskResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="findTodoTasks">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findTodoTasksResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:taskDto"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="taskDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="businessKey" type="xs:string"/>
+          <xs:element minOccurs="0" name="processInstanceId" type="xs:string"/>
+          <xs:element minOccurs="0" name="taskId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType final="#all" name="mapEntityArray">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="tns:mapEntity"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Exception" type="tns:Exception"/>
+      <xs:complexType name="Exception">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="startProcess">
+    <wsdl:part element="tns:startProcess" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="claimTaskResponse">
+    <wsdl:part element="tns:claimTaskResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVariablesResponse">
+    <wsdl:part element="tns:getVariablesResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findTodoTasks">
+    <wsdl:part element="tns:findTodoTasks" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="startProcessResponse">
+    <wsdl:part element="tns:startProcessResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findTodoTasksResponse">
+    <wsdl:part element="tns:findTodoTasksResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="completeTask">
+    <wsdl:part element="tns:completeTask" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="completeTaskResponse">
+    <wsdl:part element="tns:completeTaskResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="claimTask">
+    <wsdl:part element="tns:claimTask" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVariables">
+    <wsdl:part element="tns:getVariables" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part element="tns:Exception" name="Exception"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ApprovalWebService">
+    <wsdl:operation name="claimTask">
+      <wsdl:input message="tns:claimTask" name="claimTask"></wsdl:input>
+      <wsdl:output message="tns:claimTaskResponse" name="claimTaskResponse"></wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVariables">
+      <wsdl:input message="tns:getVariables" name="getVariables"></wsdl:input>
+      <wsdl:output message="tns:getVariablesResponse" name="getVariablesResponse"></wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="startProcess">
+      <wsdl:input message="tns:startProcess" name="startProcess"></wsdl:input>
+      <wsdl:output message="tns:startProcessResponse" name="startProcessResponse"></wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="completeTask">
+      <wsdl:input message="tns:completeTask" name="completeTask"></wsdl:input>
+      <wsdl:output message="tns:completeTaskResponse" name="completeTaskResponse"></wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findTodoTasks">
+      <wsdl:input message="tns:findTodoTasks" name="findTodoTasks"></wsdl:input>
+      <wsdl:output message="tns:findTodoTasksResponse" name="findTodoTasksResponse"></wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ApprovalWebServiceSoapBinding" type="tns:ApprovalWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="claimTask">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="claimTask">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="claimTaskResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVariables">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getVariables">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getVariablesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="completeTask">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="completeTask">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="completeTaskResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="startProcess">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="startProcess">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="startProcessResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findTodoTasks">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findTodoTasks">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findTodoTasksResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ApprovalWebService">
+    <wsdl:port binding="tns:ApprovalWebServiceSoapBinding" name="ApprovalServicePort">
+      <soap:address location="http://localhost:8080/uaf-grtwf/webservices/approval"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://SZIT-096033:8088/mockApprovalWebServiceSoapBinding</con:endpoint><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="startProcess" bindingOperationName="startProcess" type="Request-Response" outputName="startProcessResponse" inputName="startProcess" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:startProcess>
+         <!--Optional:-->
+         <arg0>admin</arg0>
+         <!--Optional:-->
+         <arg1>bu3</arg1>
+         <arg2>
+         </arg2>
+      </web:startProcess>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/startProcess"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:startProcess>
+         <!--Optional:-->
+         <arg0>?</arg0>
+         <!--Optional:-->
+         <arg1>?</arg1>
+         <!--Optional:-->
+         <arg2>
+            <!--Zero or more repetitions:-->
+            <item>
+               <!--Optional:-->
+               <key>?</key>
+               <!--Optional:-->
+               <value>?</value>
+            </item>
+         </arg2>
+      </web:startProcess>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/startProcess"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:startProcess>
+         <!--Optional:-->
+         <arg0>?</arg0>
+         <!--Optional:-->
+         <arg1>?</arg1>
+         <!--Optional:-->
+         <arg2>
+            <!--Zero or more repetitions:-->
+            <item>
+               <!--Optional:-->
+               <key>?</key>
+               <!--Optional:-->
+               <value>?</value>
+            </item>
+         </arg2>
+      </web:startProcess>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/startProcess"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="claimTask" bindingOperationName="claimTask" type="Request-Response" outputName="claimTaskResponse" inputName="claimTask" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:claimTask>
+         <!--Optional:-->
+         <arg0>checker1</arg0>
+         <!--Optional:-->
+         <arg1>137510</arg1>
+      </web:claimTask>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/claimTask"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:claimTask>
+         <arg0>auditor2</arg0>
+         <arg1>137516</arg1>
+      </web:claimTask>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/claimTask"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:claimTask>
+         <!--Optional:-->
+         <arg0>admin</arg0>
+         <!--Optional:-->
+         <arg1>140005</arg1>
+      </web:claimTask>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/claimTask"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="completeTask" bindingOperationName="completeTask" type="Request-Response" outputName="completeTaskResponse" inputName="completeTask" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:completeTask>
+         <!--Optional:-->
+         <arg0>checker1</arg0>
+         <!--Optional:-->
+         <arg1>137510</arg1>
+         <!--Optional:-->
+         <arg2>
+            <!--Zero or more repetitions:-->
+            <item>
+               <key xsi:type="xs:string" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">hasPass</key>
+               <value xsi:type="xs:boolean" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">true</value>
+            </item>
+         </arg2>
+      </web:completeTask>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/completeTask"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:completeTask>
+         <!--Optional:-->
+         <arg0>auditor2</arg0>
+         <!--Optional:-->
+         <arg1>137516</arg1>
+         <!--Optional:-->
+         <arg2>
+            <!--Zero or more repetitions:-->
+            <item>
+               <key xsi:type="xs:string" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">hasPass</key>
+               <value xsi:type="xs:boolean" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">true</value>
+            </item>
+         </arg2>
+      </web:completeTask>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/completeTask"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:completeTask>
+         <!--Optional:-->
+         <arg0>admin</arg0>
+         <!--Optional:-->
+         <arg1>137522</arg1>
+         <!--Optional:-->
+         <arg2>
+            <!--Zero or more repetitions:-->
+            <item>
+               <key xsi:type="xs:string" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">action</key>
+               <value xsi:type="xs:string" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">advance</value>
+            </item>
+         </arg2>
+      </web:completeTask>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/completeTask"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="findTodoTasks" bindingOperationName="findTodoTasks" type="Request-Response" outputName="findTodoTasksResponse" inputName="findTodoTasks" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:findTodoTasks>
+         <!--Optional:-->
+         <arg0>checker1</arg0>
+      </web:findTodoTasks>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/findTodoTasks"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:findTodoTasks>
+         <arg0>auditor2</arg0>
+      </web:findTodoTasks>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/findTodoTasks"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:findTodoTasks>
+         <!--Optional:-->
+         <arg0>admin</arg0>
+      </web:findTodoTasks>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/findTodoTasks"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 4"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://SZIT-096033:8088/mockApprovalWebServiceSoapBinding</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/findTodoTasks"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 5"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://SZIT-096033:8088/mockApprovalWebServiceSoapBinding</con:endpoint><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/findTodoTasks"/></con:call><con:call name="Request 6"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://SZIT-096033:8088/mockApprovalWebServiceSoapBinding</con:endpoint><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/findTodoTasks"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getVariables" bindingOperationName="getVariables" type="Request-Response" outputName="getVariablesResponse" inputName="getVariables" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:getVariables/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/getVariables"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="ApprovalWebServiceSoapBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="startProcess TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="startProcess"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ApprovalWebServiceSoapBinding</con:interface><con:operation>startProcess</con:operation><con:request name="startProcess"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:startProcess>
+         <!--Optional:-->
+         <arg0>?</arg0>
+         <!--Optional:-->
+         <arg1>?</arg1>
+         <!--Optional:-->
+         <arg2>
+            <!--Zero or more repetitions:-->
+            <item>
+               <!--Optional:-->
+               <key>?</key>
+               <!--Optional:-->
+               <value>?</value>
+            </item>
+         </arg2>
+      </web:startProcess>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://webservice.grtwf.uaf.com/ApprovalWebService/startProcess" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="claimTask TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="claimTask"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ApprovalWebServiceSoapBinding</con:interface><con:operation>claimTask</con:operation><con:request name="claimTask"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:claimTask>
+         <!--Optional:-->
+         <arg0>?</arg0>
+         <!--Optional:-->
+         <arg1>?</arg1>
+      </web:claimTask>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://webservice.grtwf.uaf.com/ApprovalWebService/claimTask"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="completeTask TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="completeTask"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ApprovalWebServiceSoapBinding</con:interface><con:operation>completeTask</con:operation><con:request name="completeTask"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:completeTask>
+         <!--Optional:-->
+         <arg0>?</arg0>
+         <!--Optional:-->
+         <arg1>?</arg1>
+         <!--Optional:-->
+         <arg2>
+            <!--Zero or more repetitions:-->
+            <item>
+               <!--Optional:-->
+               <key>?</key>
+               <!--Optional:-->
+               <value>?</value>
+            </item>
+         </arg2>
+      </web:completeTask>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://webservice.grtwf.uaf.com/ApprovalWebService/completeTask"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="findTodoTasks TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="findTodoTasks"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ApprovalWebServiceSoapBinding</con:interface><con:operation>findTodoTasks</con:operation><con:request name="findTodoTasks"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:findTodoTasks>
+         <!--Optional:-->
+         <arg0>?</arg0>
+      </web:findTodoTasks>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://webservice.grtwf.uaf.com/ApprovalWebService/findTodoTasks"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getVariables TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="getVariables"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ApprovalWebServiceSoapBinding</con:interface><con:operation>getVariables</con:operation><con:request name="getVariables"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/uaf-grtwf/webservices/approval</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:getVariables/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://webservice.grtwf.uaf.com/ApprovalWebService/getVariables"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService port="8080" path="/" host="SZIT-096033" name="MockService 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/></con:mockService><con:mockService port="8088" path="/mockApprovalWebServiceSoapBinding" host="SZIT-096033" name="ApprovalWebServiceSoapBinding MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="startProcess" interface="ApprovalWebServiceSoapBinding" operation="startProcess"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:startProcessResponse>
+         <!--Optional:-->
+         <return>?</return>
+      </web:startProcessResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/startProcessResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="claimTask" interface="ApprovalWebServiceSoapBinding" operation="claimTask"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:claimTaskResponse/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/claimTaskResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="completeTask" interface="ApprovalWebServiceSoapBinding" operation="completeTask"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:completeTaskResponse/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/completeTaskResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="findTodoTasks" interface="ApprovalWebServiceSoapBinding" operation="findTodoTasks"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:findTodoTasksResponse>
+         <!--Zero or more repetitions:-->
+         <return>
+            <!--Optional:-->
+            <businessKey>?</businessKey>
+            <!--Optional:-->
+            <processInstanceId>?</processInstanceId>
+            <!--Optional:-->
+            <taskId>?</taskId>
+         </return>
+      </web:findTodoTasksResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/findTodoTasksResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="getVariables" interface="ApprovalWebServiceSoapBinding" operation="getVariables"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.grtwf.uaf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:getVariablesResponse>
+         <!--Optional:-->
+         <return>
+            <!--Zero or more repetitions:-->
+            <item>
+               <!--Optional:-->
+               <key>?</key>
+               <!--Optional:-->
+               <value>?</value>
+            </item>
+         </return>
+      </web:getVariablesResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://webservice.grtwf.uaf.com/ApprovalWebService/getVariablesResponse"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
