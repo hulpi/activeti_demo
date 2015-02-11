@@ -14,8 +14,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="GU_ENTERPRISE_BUSINESS")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class GU_ENTERPRISE_BUSINESS {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenerator")

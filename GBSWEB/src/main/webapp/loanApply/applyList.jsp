@@ -14,7 +14,7 @@
 <title>申请列表</title>
 <link rel="stylesheet" type="text/css" href="<%=path%>/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=path%>/themes/icon.css">
-<link href="<%=path%>/css/style.css" rel="stylesheet"type="text/css" />
+ 
 <script type="text/javascript" src="<%=path%>/js/jquery.easyui.min.js"></script>
 <style type="text/css">
    input{
@@ -29,20 +29,20 @@
 	<span style="height: 40px">申请列表</span>
    </div>
   	<div class="Lr_right_0222">
-			<table cellspacing="1">
-			   <tr class="tits">
-	              <td>申请人姓名</td>
-	              <td>申请类型</td>
+			<table  width="100%" class="tables" border="0" align="center" cellpadding="5" cellspacing="1">
+			   <tr class="tits" align="center">
+	              <td>客户姓名</td>
+	              <td>担保编号</td>
 	              <td>申请时间</td>
 	              <td>操作</td>	              
 	              <td>影像</td>
 	              <td>确认</td>
 	             </tr>
 	          <c:forEach var="item" items="${p}" varStatus="vs">
-	              <tr class="tits" >
+	              <tr class="tr_cont" align="center">
+	                <td>${item.individual.CUST_NAME}</td>
 	                <td id="guarant_${vs.index}">${item.guarant_id}</td>
-	                <td>${item.guarant_id}</td>
-	                <td>2015/2/5</td>
+	                <td>${item.apply_date}</td>
 	                <td><input type="button" value="资料修改" id="update_Record" onclick='updateRecord("guarant_${vs.index}")'></td>
 	                <td><input type="button" value="影像管理" id="ECM_Manage" onclick='gotoECM("guarant_${vs.index}")'></td>
 	                <td><input type="button" value="确认申请" id="confirm_apply" onclick='confirmApply("guarant_${vs.index}")'></td>
@@ -68,8 +68,22 @@
 		self.location.href="/GBSWEB/getRecord.do?guarant_id="+guarant_id;
 	}
 	//点击确认按钮
-	function confirmApply(){
-		
+	function confirmApply(guarant_id){
+		var guarant_id=$('#'+guarant_id).html();
+		$.ajax({
+			url : '/GBSWEB/confirmApply.do',
+			data : {
+				guarant_id : guarant_id
+			},
+			type : 'post',
+			success : function(data) {
+				alert("确认申请成功");
+				window.location.reload(); 
+			},
+			error : function() {
+				alert("异常！");
+			}
+		});
 	}
 	
 </script>

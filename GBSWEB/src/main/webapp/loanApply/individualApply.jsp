@@ -13,13 +13,13 @@
 <title>贷款申请</title>
 <script type="text/javascript" src="<%=path%>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript"src="<%=path%>/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="<%=path%>/js/jquery.easyui.min.js"></script>
 <script  type="text/javascript" src="<%=path%>/js/add.js"></script>
-<script  type="text/javascript" src="<%=path%>/js/verifyPage.js"></script>
-<script  type="text/javascript" src="<%=path%>/js/input.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=path%>/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=path%>/css/entry.css">
 </head>
 <body style="background: #d5e4f5">
-	<form id="appForm" method="post" action="saveIndividual.do">
+	<form id="appForm" method="post" action="saveIndividual.do" onsubmit="">
 		<jsp:include page="edit_apply_info.jsp"></jsp:include>
 		<jsp:include page="individual.jsp"></jsp:include>
 		<c:if test="${empty individual}">
@@ -47,7 +47,11 @@
 	$(document).ready(function() {
 		$("#loadingdivs", parent.document).hide();
 	});
-	
-	
+/* 
+	function validate(){
+   	 if(!verifyCustBasic()){
+   		 return false;
+   	 }
+    } */
 </script>
 

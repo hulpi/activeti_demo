@@ -28,7 +28,7 @@
 <base href="<%=basePath%>">
 </head>
 <body>
-	<form action="guarantApply.do" method="post">
+	<form id="fm" action="guarantApply.do" method="post">
 		<table width="100%" border="0" align="center">
 			<tr class="tits">
 				<td width="10%">申请城市</td>
@@ -54,10 +54,10 @@
 			<tr class="tits">
 				<td width="10%">申请贷款金额:</td>
 				<td>
-				<input type="text" id="guarant_amt" name="guarant_amt" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+				<input type="text"  class="easyui-textbox" id="guarant_amt" name="guarant_amt" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
 				</td>
 				<td width="10%">担保期限:</td>
-				<td><input type="text" id="guarant_time_limit" name="guarant_time_limit"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"></td>
+				<td><input type="text"  class="easyui-textbox" id="guarant_time_limit" name="guarant_time_limit"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"></td>
 				<td width="10%">贷款产品:</td>
 				<td>
 					<div id="product" name="product" />
@@ -71,16 +71,18 @@
 		<table width="100%" border="0" align="left">
 			<tr class="tits">
 				<td width="20%"><input class="radio" type="radio" id="inType" name="applyType" value="IN">申请人身份证号码：</td>
-				<td width="80%"><input type="text" id="in_id" name="in_id" style="width:200px" 
+				<td width="80%"><input type="text"   id="in_id"  name="in_id" style="width:200px" 
 					onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" 
 					disabled="disabled"></td>
 			</tr>
 			<tr class="tits">
 				<td width="20%"><input class="radio" type="radio" id="enType" name="applyType" value="EN">企业注册机构代码：</td>
-				<td width="80%"><input type="text" id="en_id" name="en_id" style="width:200px;" disabled="disabled"></td>
+				<td width="80%"><input type="text"   id="en_id" name="en_id" style="width:200px;" disabled="disabled"></td>
 			</tr>
 			<tr class="tits">
-				<td colspan="2" align="right"><input type="submit" id="nextButton" value="下一步" ></td>
+				<td colspan="2" align="right">
+				<a id="nextButton" class="easyui-linkbutton" iconCls="icon-ok" >下一步</a></td>
+				</td>
 			</tr>
 			
 		</table>
@@ -158,7 +160,7 @@ $('#nextButton').click(function(){
 	
 	var guarant_time_limit = $('#guarant_time_limit').val();
 	if(guarant_time_limit == null || guarant_time_limit == ''){
-		jqalertly('请输入担保期限！');			
+		jqalertly('请输入担保期限！');	
 		return false;
 	}
 	
@@ -173,5 +175,6 @@ $('#nextButton').click(function(){
 		jqalertly('选择的贷款产品有误！');			
 		return false;
 	}
+	$('#fm').submit();
 });
 </script>

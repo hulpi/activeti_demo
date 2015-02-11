@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * 分行与贷款产品的关联表
  * 
@@ -18,6 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "GU_CITY_FUNDER_INFO")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class GU_CITY_FUNDER_INFO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenerator")

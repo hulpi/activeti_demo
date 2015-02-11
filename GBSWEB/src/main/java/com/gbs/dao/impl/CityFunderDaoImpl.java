@@ -15,7 +15,6 @@ public class CityFunderDaoImpl extends HibernateDaoSupport implements CityFunder
 	}
 
 	public List<GU_PRODUCT_INFO> getProductByCity(String cityId) {
-		getHibernateTemplate().setCacheQueries(true);
 		if(cityId == null){
 			return null;
 		}
@@ -24,7 +23,6 @@ public class CityFunderDaoImpl extends HibernateDaoSupport implements CityFunder
 	}
 
 	public GU_PRODUCT_INFO getProductByProductcode(String productId) {
-		getHibernateTemplate().setCacheQueries(true);
 		if(productId == null){
 			return null;
 		}
@@ -38,7 +36,6 @@ public class CityFunderDaoImpl extends HibernateDaoSupport implements CityFunder
 	}
 
 	public List<GU_PRODUCT_INFO> getAllProduct() {
-		getHibernateTemplate().setCacheQueries(true);
 		return (List<GU_PRODUCT_INFO>)getHibernateTemplate().find("select distinct cf.funder.productSet from GU_CITY_FUNDER_INFO cf ");
 	}
 

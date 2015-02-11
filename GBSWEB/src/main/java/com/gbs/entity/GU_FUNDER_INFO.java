@@ -49,6 +49,7 @@ public class GU_FUNDER_INFO {
 
 	@OneToMany(targetEntity = GU_PRODUCT_INFO.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "funder")
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	private Set<GU_PRODUCT_INFO> productSet;
 
 	public Long getGu_funder_info_oid() {

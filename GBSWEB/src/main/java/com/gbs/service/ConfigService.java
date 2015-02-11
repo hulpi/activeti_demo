@@ -15,5 +15,10 @@ public interface ConfigService {
 	public List<GU_CONFIG_INFO> getLoanPurpose();
 	
 	public List<GU_CONFIG_INFO> getProductType();
+	
+	
+	public String getLoanPurposeDes(String loanPurpose);
+	
+	public String getProductTypeDes(String productType);
 
 }

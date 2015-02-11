@@ -10,7 +10,7 @@
 		<tr>
 			<td><font color="red">*</font>证件类型：</td>
 			<td><select id="CERT_TYPE" name="CERT_TYPE">
-					<option value="">中国身份证</option>
+					<option value="CN">中国身份证</option>
 			</select></td>
 			<td><font color="red">*</font>身份证号码：</td>
 			<td><input type="text" id="CERT_NO" name="CERT_NO"
@@ -46,7 +46,7 @@
 			<td><input type="text" id="NATIVE_PLACE" name="NATIVE_PLACE"
 				value="${individual.NATIVE_PLACE }" style="width: 100px;" maxlength="35"></td>
 			<td><font color="red">*</font>户口所在地：</td>
-			<td><input type="text" name="HUKOU_ADD" value="${individual.HUKOU_ADD }">
+			<td><input type="text" name="HUKOU_ADD" id="HUKOU_ADD" value="${individual.HUKOU_ADD }">
 			</td>
 		</tr>
 		<tr>

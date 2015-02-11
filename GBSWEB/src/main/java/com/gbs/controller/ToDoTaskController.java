@@ -45,33 +45,7 @@ public class ToDoTaskController {
 	@Autowired
 	private ApplyInfoRuleDelegate ruleDelegate;
 	
-	 /**
-     * 任务列表
-     *
-     * @param
-	 * @throws Exception 
-     */
-//    @RequestMapping(value = "task")
-//    public ModelAndView taskList(HttpSession session, HttpServletRequest request) throws Exception {
-//        ModelAndView mav = new ModelAndView("/approval/taskList");
-//        
-//        String action = request.getParameter("action");
-//        logger.info("Action = " + action);
-//
-//        UserInfoDto userInfo = UserUtil.getUserFromSession(session);
-//        String userId = userInfo.getUserid();
-//        logger.info("userId = " + userId);
-//        
-//        List<ApprovalInfoDto> approvalInfos = approvalService.findTodoTasks(userId);
-//        
-//        logger.info("task size = " + (approvalInfos!=null?approvalInfos.size():0));
-//        
-//        mav.addObject("approvalInfos", approvalInfos);
-//        mav.addObject("action", action);
-//        
-//        return mav;
-//    }
-    
+
     /**
      * 任务列表
      *
@@ -107,30 +81,37 @@ public class ToDoTaskController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "task/claim/{id}//{action}")
-    public String claimTask(@PathVariable("id") String taskId, @PathVariable("action") String action,
+    @RequestMapping(value = "task/claim/{id}/{action}/{guaranId}")
+    public String claimTask(@PathVariable("id") String taskId, @PathVariable("action") String action, @PathVariable("guaranId") String guaranId,
     		HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
     	logger.info("taskId = " + taskId);
     	logger.info("action = " + action);
+    	logger.info("guaranId = " + guaranId);
+    	
     	String userId = UserUtil.getUserFromSession(session).getUserid();
     	logger.info("userId = " + userId);
-        approvalService.claimTask(userId, taskId);
+    	
+        approvalService.claimTask(userId, taskId, action, guaranId);
         
         redirectAttributes.addFlashAttribute("message", "任务已签收");
         
         return "redirect:/approval/task?action="+action;
     }
     
-    @RequestMapping(value = "complete/{id}", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "complete/{id}/{businessKey}/{status}", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
-    public String completeTask(@PathVariable("id") String taskId, Variable var, HttpSession session) {
+    public String completeTask(@PathVariable("id") String taskId, @PathVariable("businessKey") String businessKey, 
+    		@PathVariable("status") String status, Variable var, HttpSession session) {
     	logger.info("taskId = " + taskId);
+    	logger.info("businessKey = " + businessKey);
+    	logger.info("status = " + status);
     	
         try {
             Map<String, Object> variables = var.getVariableMap();
             String userId = UserUtil.getUserFromSession(session).getUserid();
             
-            approvalService.completeTask(userId, taskId, variables);
+            approvalService.completeTask(userId, taskId, businessKey, status, variables);
+            
             return "success";
         } catch (Exception e) {
             logger.error("error on complete task {}, variables={}", new Object[]{taskId, var.getVariableMap(), e});

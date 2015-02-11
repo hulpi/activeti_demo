@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.gbs.dto.APPLY_INFO_DTO;
 import com.gbs.entity.GU_APPLY_INFO;
-import com.gbs.entity.GU_INDIVIDUAL_INFO;
+import com.gbs.util.Page;
 
 /**
  * 申请单操作DAO
@@ -71,6 +71,27 @@ public interface ApplyInfoDao {
 	 * @return
 	 */
 	public GU_APPLY_INFO getApplyInfoByGuarantId(String guarantId);
+	
+	/**
+	 * 查询申请单的信息
+	 * @param dto
+	 * @return
+	 */
+	public List<GU_APPLY_INFO> getApplyInfoList(APPLY_INFO_DTO dto,Page page);
+	
+	/**
+	 * 更新状态
+	 * @param guaranId
+	 * @param status
+	 */
+	public void updateStatus(final String guaranId, final String status);
+	
+	/**
+	 * 查询申请单的总数
+	 * @param dto
+	 * @return
+	 */
+	public int getApplyInfoCount(APPLY_INFO_DTO dto);
 	
 	
 }

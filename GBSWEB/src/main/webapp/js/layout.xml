@@ -20,7 +20,8 @@
 			<folder name="业务受理">
 			<leaf id="1062" name="1. 个人申请资料" url="./loanApply/individualApply.jsp"/>
 			<leaf id="1063" name="2. 企业申请资料" url="./loanApply/enterpraiseApply.jsp"/>
-						<leaf id="1056" name="3. 担保申请" url="loanApply/apply_info.jsp" />
+			<leaf id="1056" name="3. 担保申请" url="loanApply/apply_info.jsp" />
+			<leaf id="1060" name="4. 申请进度查询" url="loanApply/queryApplyInfo.jsp" /> 
 			<leaf id="1056" name="4. 申请管理" url="getApplyList.do" /> 
 			</folder>
 			 

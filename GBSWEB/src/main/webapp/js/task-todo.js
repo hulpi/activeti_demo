@@ -128,7 +128,7 @@ function judge(businessKey, variables) {
  * 完成任务
  * @param {Object} taskId
  */
-function complete(taskId, variables) {
+function complete(taskId, businessKey, status, variables) {
     var dialog = this;
     
     var keys = "", values = "", types = "";
@@ -150,7 +150,7 @@ function complete(taskId, variables) {
     });
 	
 	// 发送任务完成请求
-    $.post(ctx + '/approval/complete/' + taskId, {
+    $.post(ctx + '/approval/complete/' + taskId +'/' +businessKey +'/' + status, {
         keys: keys,
         values: values,
         types: types
@@ -214,6 +214,7 @@ var handleOpts = {
 			text: '通过',
 			click: function() {
 				var taskId = $(this).data('taskId');
+				var businessKey = $(this).data('id');
 				$('<div/>', {
 					title: '初审意见',
 					html: "<textarea id='checkerPassReason' style='width: 250px; height: 60px;'></textarea>"
@@ -231,7 +232,7 @@ var handleOpts = {
 								return;
 							}
 							
-							complete(taskId, [{
+							complete(taskId,businessKey, '8', [{
 								key: 'hasPass',
 								value: true,
 								type: 'B'
@@ -254,7 +255,7 @@ var handleOpts = {
 			text: '驳回',
 			click: function() {
 				var taskId = $(this).data('taskId');
-				
+				var businessKey = $(this).data('id');
 				$('<div/>', {
 					title: '驳回理由',
 					html: "<textarea id='checkerBackReason' style='width: 250px; height: 60px;'></textarea>"
@@ -272,7 +273,7 @@ var handleOpts = {
 								return;
 							}
 							
-							complete(taskId, [{
+							complete(taskId, businessKey, '5', [{
 								key: 'hasPass',
 								value: false,
 								type: 'B'
@@ -308,7 +309,7 @@ var handleOpts = {
 			text: '通过',
 			click: function() {
 				var taskId = $(this).data('taskId');
-				
+				var businessKey = $(this).data('id');
 				$('<div/>', {
 					title: '审核意见',
 					html: "<textarea id='auditorPassReason' style='width: 250px; height: 60px;'></textarea>"
@@ -322,7 +323,7 @@ var handleOpts = {
 								alert('请输入审核意见！');
 								return;
 							}
-							complete(taskId, [{
+							complete(taskId,businessKey, '9', [{
 								key: 'hasPass',
 								value: true,
 								type: 'B'
@@ -345,7 +346,7 @@ var handleOpts = {
 			text: '驳回',
 			click: function() {
 				var taskId = $(this).data('taskId');
-				
+				var businessKey = $(this).data('id');
 				$('<div/>', {
 					title: '驳回理由',
 					html: "<textarea id='auditorBackReason' style='width: 250px; height: 60px;'></textarea>"
@@ -359,7 +360,7 @@ var handleOpts = {
 								alert('请输入驳回理由！');
 								return;
 							}
-							complete(taskId, [{
+							complete(taskId,businessKey, '13', [{
 								key: 'hasPass',
 								value: false,
 								type: 'B'
@@ -395,7 +396,7 @@ var handleOpts = {
 			text: '通过',
 			click: function() {
 				var taskId = $(this).data('taskId');
-				
+				var businessKey = $(this).data('id');
 				$('<div/>', {
 					title: '审批意见',
 					html: "<textarea id='approverPassReason' style='width: 250px; height: 60px;'></textarea>"
@@ -409,7 +410,7 @@ var handleOpts = {
 								alert('请输入审批意见！');
 								return;
 							}
-							complete(taskId, [{
+							complete(taskId, businessKey, '10', [{
 								key: 'action',
 								value: 'pass',
 								type: 'S'
@@ -432,7 +433,7 @@ var handleOpts = {
 			text: '上报高级',
 			click: function() {
 				var taskId = $(this).data('taskId');
-				
+				var businessKey = $(this).data('id');
 				$('<div/>', {
 					title: '上报意见',
 					html: "<textarea id='approverUpReason' style='width: 250px; height: 60px;'></textarea>"
@@ -446,7 +447,7 @@ var handleOpts = {
 								alert('请输入上报意见！');
 								return;
 							}
-							complete(taskId, [{
+							complete(taskId,businessKey, '11',[{
 								key: 'action',
 								value: 'advance',
 								type: 'S'
@@ -469,7 +470,7 @@ var handleOpts = {
 			text: '驳回',
 			click: function() {
 				var taskId = $(this).data('taskId');
-				
+				var businessKey = $(this).data('id');
 				$('<div/>', {
 					title: '驳回理由',
 					html: "<textarea id='approverBackReason' style='width: 250px; height: 60px;'></textarea>"
@@ -483,7 +484,7 @@ var handleOpts = {
 								alert('请输入驳回理由！');
 								return;
 							}
-							complete(taskId, [{
+							complete(taskId,businessKey, '14', [{
 								key: 'action',
 								value: 'reject',
 								type: 'S'
@@ -519,7 +520,7 @@ var handleOpts = {
 			text: '通过',
 			click: function() {
 				var taskId = $(this).data('taskId');
-				
+				var businessKey = $(this).data('id');
 				$('<div/>', {
 					title: '审批意见',
 					html: "<textarea id='advanceApproverPassReason' style='width: 250px; height: 60px;'></textarea>"
@@ -533,7 +534,7 @@ var handleOpts = {
 								alert('请输入审批意见！');
 								return;
 							}
-							complete(taskId, [{
+							complete(taskId,businessKey,'10', [{
 								key: 'hasPass',
 								value: true,
 								type: 'B'
@@ -556,7 +557,7 @@ var handleOpts = {
 			text: '驳回',
 			click: function() {
 				var taskId = $(this).data('taskId');
-				
+				var businessKey = $(this).data('id');
 				$('<div/>', {
 					title: '驳回理由',
 					html: "<textarea id='advanceApproverBackReason' style='width: 250px; height: 60px;'></textarea>"
@@ -570,7 +571,7 @@ var handleOpts = {
 								alert('请输入驳回理由！');
 								return;
 							}
-							complete(taskId, [{
+							complete(taskId,businessKey,'15', [{
 								key: 'hasPass',
 								value: false,
 								type: 'B'
@@ -627,8 +628,8 @@ var handleOpts = {
 			text: '放弃申请',
 			click: function() {
 				var taskId = $(this).data('taskId');
-				
-				complete(taskId, [{
+				var businessKey = $(this).data('id');
+				complete(taskId, businessKey, '16', [{
 					key: 'hasPass',
 					value: false,
 					type: 'B'

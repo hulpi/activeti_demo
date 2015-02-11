@@ -14,6 +14,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  * 分行
  * @author wb00002
@@ -21,6 +24,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "GU_BRANCH_INFO")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class GU_BRANCH_INFO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenerator")

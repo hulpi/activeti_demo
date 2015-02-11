@@ -28,7 +28,6 @@ public class IndividualInfoDaoImpl extends HibernateDaoSupport  implements Indiv
 	}
 
 	public GU_INDIVIDUAL_INFO getIndividualInfo(String CERT_NO){
-		getHibernateTemplate().setCacheQueries(true);
 		GU_INDIVIDUAL_INFO gu_individual_info = null;
 		List<GU_INDIVIDUAL_INFO> list = (List<GU_INDIVIDUAL_INFO>)getHibernateTemplate().find("from GU_INDIVIDUAL_INFO i "
 				+ " left join fetch i.individualHouseSet "
@@ -48,7 +47,6 @@ public class IndividualInfoDaoImpl extends HibernateDaoSupport  implements Indiv
 
 	@Override
 	public GU_INDIVIDUAL_INFO getBaseIndividualInfo(String CERT_NO) {
-		getHibernateTemplate().setCacheQueries(true);
 		GU_INDIVIDUAL_INFO gu_individual_info = null;
 		List<GU_INDIVIDUAL_INFO> list = (List<GU_INDIVIDUAL_INFO>) getHibernateTemplate().find(" from GU_INDIVIDUAL_INFO i where i.CERT_NO=?",CERT_NO);
 		if(list != null && list.size()>0){
@@ -59,7 +57,6 @@ public class IndividualInfoDaoImpl extends HibernateDaoSupport  implements Indiv
 
 	@Override
 	public GU_ENTERPRISE_INFO getEnterprise(String REGISER_NO) {
-		getHibernateTemplate().setCacheQueries(true);
 		GU_ENTERPRISE_INFO gu_enterprise_info = null;
 		List<GU_ENTERPRISE_INFO> list = (List<GU_ENTERPRISE_INFO>) getHibernateTemplate().find(" from GU_ENTERPRISE_INFO i left join fetch i.enterpriseSet where i.REGISER_NO=?",REGISER_NO);
 		if(list != null && list.size()>0){

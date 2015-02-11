@@ -69,7 +69,6 @@ public class IndivalInfoController {
 			HostInfoModel hostInfoModel,
 			LinkManInfoModel linkManInfoModel,
 			CompanyInfoModel companyInfoModel,
-			APPLY_INFO_DTO applyInfo,
 			HttpServletRequest request) throws Exception {
 		
 		log.debug("修改个人信息开始");

@@ -1,6 +1,5 @@
 package com.gbs.controller;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.jboss.logging.annotations.Param;
+import net.sf.json.JSONObject;
+
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,20 +17,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gbs.constant.RuleItemStatus;
 import com.gbs.delegate.ApplyInfoRuleDelegate;
 import com.gbs.dto.APPLY_INFO_DTO;
 import com.gbs.dto.EnterPraiseDTO;
 import com.gbs.dto.INDIVIDUAL_INFO_DTO;
+import com.gbs.dto.UiApplyInfoDto;
 import com.gbs.dto.UserInfoDto;
 import com.gbs.entity.GU_APPLY_INFO;
 import com.gbs.service.ApplyInfoService;
 import com.gbs.service.CityService;
 import com.gbs.service.FunderService;
 import com.gbs.service.IndividualInfoService;
+import com.gbs.util.Page;
 import com.gbs.util.UserUtil;
-import com.ibm.rules.decisionservice.gbs_rule.gbs_dc.GuAPPLYINFO;
-import com.ibm.rules.decisionservice.gbs_rule.gbs_dc.ResponseInfo;
 
 @Controller
 public class ApplyInfoController {
@@ -76,9 +76,10 @@ public class ApplyInfoController {
 	}
 	@RequestMapping(value = "/getApplyList", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
-	public ModelAndView getApplyList()throws Exception {
-		ModelAndView model = null;
-		String username="Frank";
+	public ModelAndView getApplyList(HttpServletRequest request)throws Exception {
+		ModelAndView model = null;		
+		UserInfoDto user = UserUtil.getUserFromSession(request.getSession());
+		String username=user.getUserid();
 		List<GU_APPLY_INFO> list = applyInfoService.queryApplyInfoByUser(username);
 		if(list!=null&&list.size()>0){
 			Map map = new HashMap(); 
@@ -93,13 +94,13 @@ public class ApplyInfoController {
 	public ModelAndView getRecord(String guarant_id )throws Exception {
 		ModelAndView model = null;
 		INDIVIDUAL_INFO_DTO individual = applyInfoService.getIndival(guarant_id);
-		Map map = new HashMap();
-		map.put("i", individual);//基本资料
-		map.put("p", individual.getHostInfoModel());//房产
-		//map.put("pp", individual.getHostInfoModel().getHostInfo());//房产
-		map.put("c", individual.getCompanyInfoModel());//公司
-		map.put("l", individual.getLinkManInfoModel());//联系人
-		model = new ModelAndView("loanApply/updateInfo",map);
+		if(individual != null){
+			model = new ModelAndView("loanApply/updateInfo");
+			model.addObject("individual",individual);
+			model.addObject("houstInfo",individual.getHostInfoModel().getHostInfo());
+			model.addObject("companyInfo",individual.getCompanyInfoModel().getCompanyInfo());
+			model.addObject("linkManInfo",individual.getLinkManInfoModel().getLinkManInfo());
+		}
 		return model;
      }
 	/**
@@ -129,5 +130,40 @@ public class ApplyInfoController {
 		applyInfo.setUserId(user.getUserid());
 		applyInfoService.updateApplyInfo(applyInfo);
 		return model;
+	}
+	
+	
+	/**
+	 * 查询申请单列表
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping(value = "/getApplyInfoList", method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String getApplyInfoList(APPLY_INFO_DTO dto,int page,int rows) {
+        Page p = new Page();
+		p.setCurrPage(page);
+		p.setRows(rows);
+		
+		List<UiApplyInfoDto> applyInfoList = applyInfoService.getApplyInfoList(dto,p);
+		Map<String, Object> jsonMap = new HashMap<String, Object>();//定义map  
+		jsonMap.put("total",applyInfoService.getApplyInfoCount(dto));//total键 存放总记录数，必须的  
+        jsonMap.put("rows", applyInfoList);//rows键 存放每页记录 list  
+        JSONObject res = JSONObject.fromObject(jsonMap);//格式化result   一定要是JSONObject  
+        
+		return res.toString();
+	}
+	
+	/**
+	 * 确认申请单
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping(value = "/confirmApply", method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String confirmApply(String guarant_id,HttpServletRequest request)throws Exception {
+		UserInfoDto user = UserUtil.getUserFromSession(request.getSession());
+		applyInfoService.confirmApply(guarant_id, user.getUserid());
+        return null;
 	}
 }

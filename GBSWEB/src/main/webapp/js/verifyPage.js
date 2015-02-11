@@ -5,22 +5,22 @@
  * @return
  */
 function selectJudge(id,msg){
-	 if($(id)!=null){
-		 var str=$(id).value;
+	 if($("#"+id)!=null){
+		 var str=$("#"+id).val();
 			if(str==""){
-				parent.Ext.Msg.alert('温馨提示',msg,function(e){
+				$.messager.alert('温馨提示',msg,function(e){
 					if(e=='ok'){
 						try{
-					 		$(id).focus();
+							$("#"+id).focus();
 					 	}catch(e){
 					 		
 					 	}
 					}
 				});
-				$(id).style.backgroundColor="FF0000";
+				$("#"+id).css("borderColor","FF0000");
 				return false;
 			}else{
-				$(id).style.backgroundColor="";
+				$("#"+id).css("borderColor","");
 				return true;
 			} 
 	 }
@@ -33,22 +33,23 @@ function selectJudge(id,msg){
  * @return
  */
 function notnull(id,msg){
-	if($(id)!=null){
-		var str=$(id).value;
+	if($("#"+id)!=null){
+		var str=$("#"+id).val();
 		if(str==""){
-			parent.Ext.Msg.alert('温馨提示',msg,function(e){
+			$.messager.alert('温馨提示',msg,function(e){
 				if(e=='ok'){
 					try{
-				 		$(id).focus();
+				 		$("#"+id).focus();
+				 		//document.getElementById(id).focus();
 				 	}catch(e){
 				 		
 				 	}
 				}
 			});
-			$(id).style.borderColor="red";
+			$("#"+id).css("borderColor","red");
 			return false;
 		}else{
-			$(id).style.borderColor="";
+			$("#"+id).css("borderColor","");
 		}
 	}
 	return true;
@@ -56,11 +57,11 @@ function notnull(id,msg){
 	//radio
 	function checkSpanRadio(id,id2,msg){
 		if(checkRadioCheck(id)==false){
-			parent.Ext.Msg.alert('温馨提示',msg);
-			$(id2).style.backgroundColor="FF0000";
+			$.messager.alert('温馨提示',msg);
+			$("#"+id2).css("backgroundColor",'FF0000');
 			return false;
 		}else{
-			$(id2).style.backgroundColor="";
+			$("#"+id2).css("backgroundColor",'');
 			return true;
 		}
 		return true;
@@ -83,30 +84,41 @@ function notnull(id,msg){
 	 * @return
 	 */
 	function checkNumber(id,msg,msg2,v){
-		var str = $(id).value ;
+		var str = $("#"+id).val() ;
 	 	if(str!=''){
 	 		if(str<=v){
-	 			parent.Ext.Msg.alert('温馨提示',msg,function(e){
-					if(e=='ok'){try{$(id).focus();}catch(e){}
+	 			$.messager.alert('温馨提示',msg,function(e){
+					if(e=='ok'){
+						try{
+					 		$("#"+id).focus();
+					 		//document.getElementById(id).focus();
+					 	}catch(e){
+					 		
+					 	}
 					}
 				});
-	 		$(id).style.borderColor="red";
-			$(id).focus();
+	 	    $("#"+id).css("borderColor","red");
 			return false;
 	 	}else {
-	 		$(id).style.borderColor="";
+	 	   $("#"+id).css("borderColor","");
 	 	}
 		}else{
-			parent.Ext.Msg.alert('温馨提示',msg2,function(e){
-				if(e=='ok'){try{$(id).focus();}catch(e){}
+			$.messager.alert('温馨提示',msg2,function(e){
+				if(e=='ok'){
+					try{
+				 		$("#"+id).focus();
+				 		//document.getElementById(id).focus();
+				 	}catch(e){
+				 		
+				 	}
 				}
-			 });
-			 $(id).style.borderColor="red";
-			 $(id).focus();
+			});
 			 return false;
 		 }
 	 	return true;
 	}
+	
+	
 	//申请单页面校验
 	function verifySqd(){
 		if(!verifyLoan()){
@@ -189,50 +201,25 @@ function notnull(id,msg){
 		return true;
 	}
 	
-	/**客户贷款信息校验*/
-	function verifyLoan(){
-		if(!checkSpanRadio("GR_IS_MAINLOANER","SPAN_MAIN_LOANER","主贷人不能留空")) return false;
-		if(!checkNumber("SQD_APPLY_LOAN_AMOUNT","申请金额必须大于0","申请金额不能为空","0")) return false;
-		if(!checkNumber("SQD_PAY_PERIOD","付款期数必须大于0","付款期数不能为空","0")) return false;
-		if(!selectJudge("SQD_APPLY_LOAN_PRODUCT","贷款产品不能为空")) return false;
-		if(!selectJudge("SQD_APPLY_CHANNAL","渠道不能为空")) return false;
-		if($('SQD_SALE_GROUP')!=null && $('SQD_SALE_GROUP').value!=''){//如果销售组不为空，则代理人号码必填
-			if(!selectJudge("SQD_AGENT_NUMBER","代理人号码不能为空")) return false; //媒体 来源 贷款用途 渠道
-		}
-		if(!selectJudge("SQD_MEDIUM","媒体不能为空")) return false; //媒体 来源 贷款用途 渠道
-		if(!selectJudge("SQD_SOURCE","来源不能为空")) return false;
-		if(!selectJudge("SQD_LOAN_PURPOSE","贷款用途不能为空")) return false;
-		if(!selectJudge("SQD_BORROWER_TYPE","借款人类型不能为空")) return false;
-		return true;
-	}
 	/**客户基本资料*/
 	function verifyCustBasic(){
 		//姓，名，出生日期，户口所在地省，户口所在地市，籍贯，性别，婚姻状况，身份证有效期起，止，年，中国身份证地址，省，市，区
-		if(!selectJudge("GR_CERT_TYPE","证件类型不能为空")) return false;
-		if(!notnull("GR_CERT_NO","身份证号码不能为空")) return false;		
-		if(!notnull("GR_SURNAME","姓不能为空")) return false;
-		if(!notnull("GR_GIVENNAME","名不能为空")) return false;
-		if(!notnull("GR_BIRTHDAY","出生日期不能为空")) return false;
-		if(!notnull("GR_RPR_PROVINCE","省不能为空")) return false;
-		if(!notnull("GR_RPR_CITY","市不能为空")) return false;
-		if(!notnull("GR_NATIVE_PLACE","籍贯不能为空")) return false;
-		if(!notnull("GR_CERT_NO","身份证号码不能为空")) return false;
-		if(!checkSpanRadio("GR_SEX","SPAN_SEX","性别不能留空")) return false; 
- 		if(!selectJudge("GR_MARITAL_STATUS","婚姻状况不能留空")) return false;
- 		if(!selectJudge("GR_EDUCATION_LEVEL","教育程度不能留空")) return false;
- 		if(!notnull("GR_ID_CARD_VALIDITY_FROM","身份证有效期起不能为空")) return false;
- 		if(!notnull("GR_ID_CARD_VALIDITY_TO","身份证有效期止不能为空")) return false;
- 		if(!notnull("GR_ID_CARD_VALIDITY_PERIOD","身份证有效期不能为空")) return false;
- 		if(!selectJudge("GR_ID_CARD_ADDRESS_PROVINCE","中国身份证上的地址省不能留空")) return false;
- 		if(!selectJudge("GR_ID_CARD_ADDRESS_CITY","中国身份证上的地址市不能留空")) return false;
- 		if(!selectJudge("GR_ID_CARD_ADDRESS_AREA","中国身份证上的地址区不能留空")) return false;
- 		if(!notnull("GR_ID_CARD_ADDRESS_DETAIL","中国身份证上的地址不能留空")) return false;
- 		if($('GR_EMAIL')!=null && $('GR_EMAIL').value!=''){
- 			return isValidMail('GR_EMAIL','电子邮件格式有误！');
- 		}
- 		if(!verifyAppBirSex()) return false;
- 		return true;
+		if(!selectJudge("CERT_TYPE","证件类型不能为空")) return false;
+		if(!notnull("CERT_NO","身份证号码不能为空")) return false;		
+		if(!notnull("CUST_NAME","姓名不能为空")) return false;
+		if(!notnull("BIRTHDAY","出生日期不能为空")) return false;
+		if(!selectJudge("SEX","性别不能为空")) return false;
+		if(!selectJudge("EDUCATION_LEVEL","教育程度不能留空")) return false;
+		if(!notnull("NATIVE_PLACE","籍贯不能为空")) return false;
+ 		if(!notnull("HUKOU_ADD","户口地址不能空")) return false;
+ 		if(!notnull("ID_CARD_ADDRESS_DETAIL","中国身份证上的地址不能留空")) return false;
+ 		if(!notnull("ID_CARD_VALIDITY_FROM","身份证有效期止不能为空")) return false;
+ 		if(!notnull("ID_CARD_VALIDITY_TO","身份证有效期止不能为空")) return false;
+ 		if(!notnull("ID_CARD_VALIDITY_PERIOD","身份证有效期不能为空")) return false; 		
 	}
+	
+	
+	
 	/*校验电邮地址*/
 	function isValidMail(id,msg) {                      
 		var Regex = /^(?:\w+\.?)*\w+@(?:\w+\.)*\w+$/; 
@@ -254,33 +241,36 @@ function notnull(id,msg){
 	} 
 	//校验申请人基本信息出生日期和性别
 	function verifyAppBirSex(){
-		var certtype=$("GR_CERT_TYPE").value;
-		var certno=$("GR_CERT_NO").value;
+		var certtype=$('#CERT_TYPE').val();
+		var certno=$('#CERT_NO').val();
 		if(certtype=='CN' && certno.length==18){
 			var str = certno.substring(6,14);
 			var str2 = certno.substring(16,17);
 			var birth=str.substring(0,4)+'/'+str.substring(4,6)+'/'+str.substring(6,8);
-			if(birth!=$("GR_BIRTHDAY").value){
-				parent.Ext.Msg.alert('温馨提示','出生日期选择不正确!');
-				$("GR_BIRTHDAY").style.borderColor="red";
+			if(birth!=$('#BIRTHDAY').val()){
+				$.messager.alert("温馨提示", "出生日期选择不正确!", 'warning');
+				$('#BIRTHDAY').css("borderColor","red")
 				return false;
 			}
 			if(str2%2!=0){
-				if(!$("SQR_MAN").checked){
-					parent.Ext.Msg.alert('温馨提示','性别选择不正确!');
-					$("SPAN_SEX").style.backgroundColor="FF0000";
-					return false;
-				}else{
-					$("SPAN_SEX").style.backgroundColor="";
+				var sex=$('#SEX').val();
+				  if(sex!="M"){
+						$.messager.alert("温馨提示", "性别选择不正确!", 'warning');
+						$("#SEX").css("backgroundColor","FF0000");
+						return false;
+				}
+				else{
+					$("#SEX").css("backgroundColor","");
 					return true;
 				}
 			}else{
-				if(!$("SQR_WOMAN").checked){
-					parent.Ext.Msg.alert('温馨提示','性别选择不正确!');
-					$("SPAN_SEX").style.backgroundColor="FF0000";
-					return false
-				}else{
-					$("SPAN_SEX").style.backgroundColor="";
+				  if(sex!="F"){
+						$.messager.alert("温馨提示", "性别选择不正确!", 'warning');
+						$("#SEX").css("backgroundColor","FF0000");
+						return false;
+				}
+				else{
+					$("#SEX").css("backgroundColor","");
 					return true;
 				}
 			}
@@ -290,96 +280,22 @@ function notnull(id,msg){
 		}
 		return true;
 	}
-	//校验住宅 省，市，区，地址,住宅性质，总人数，居住时间起，止，年限，
-	function verifyRe(){
-		for(var i=1;i<=re;i++){
-			if(!selectJudge("RE_ADDRESS_PROVINCE_"+i+"","住宅资料-省不能留空")) return false;
-			if(!selectJudge("RE_ADDRESS_CITY_"+i+"","住宅资料-市不能留空")) return false;
-			if(!selectJudge("RE_ADDRESS_AREA_"+i+"","住宅资料-区不能留空")) return false;
-			if(!selectJudge("RE_ADDRESS_DETAIL_"+i+"","住宅资料-地址不能留空")) return false;
-			if($("RE_ADDRESS_DETAIL_"+i+"")!=null && $("RE_ADDRESS_DETAIL_"+i+"").value!=''){
-				if(!notnull("RE_POST_CODE_"+i+"","住宅资料-地址不为空,邮政编码不能留空")) return false;
-			}
-			if(!notnull("RE_DWELL_TIME_FROM_"+i+"","住宅资料-起始居住时间不能留空")) return false;
-			if(!selectJudge("RE_DWELLING_TYPE_"+i+"","住宅资料-住宅类别不能留空")) return false;
-			if(!notnull("RE_CONT_OR_RENT_AMOUNT_"+i+"","住宅资料-按揭供款租金不能留空")) return false;
-			if(!notnull("RE_DWELL_TIME_LIMIT_"+i+"","住宅资料-居住年限不能留空")) return false;
-			if(!checkSpanOtherRadio("RE_LIVEALONE_"+i+"","SPAN_DWELL_WITH_WHO_"+i+"","RE_OTHER_"+i+"","住宅资料-与谁居住不能留空"))return false; //与谁居住
-			if(!notnull("RE_DWELL_NUMBER_"+i+"","住宅资料-总人数不能留空")) return false;
-			if(!dwellWithWho("RE_DWELL_WITH_WHO_"+i+"","RE_DWELL_NUMBER_"+i+"")) return false;
-		}
-		return true ;
-	}
-	//居住人数
-	function dwellWithWho(id,id2){
-		var count=0;
-		if($(id)!=null && $(id).value!='' || ($(id2)!=null && $(id2).value!='')){
-			var indexRe = $(id).value;
-			var v = indexRe.substring(0,1);
-			if(v.indexOf('Y')>=0){ //与谁居住选择独居时 总人数只能为1
-				if($(id2).value!=1){
-					parent.Ext.Msg.alert('温馨提示','与谁居住为独居时,总人数只能为1');
-					count++;
-					return false;
-				}
-			}else if(v.indexOf('Y')<0){ //选择非独居时,总人数需大于1
-				if($(id2).value<=1){
-					parent.Ext.Msg.alert('温馨提示','与谁居住不是独居时,总人数必须大于1');
-					count++;
-					return false;
-				}
-			}
-		}
-		if(count!=0){
-			return false;
-		}else{
-			return true;
-		}
-	}
-	/**
-	 * 校验-住宅资料-与谁居住
-	 * @param id
-	 * @param id2
-	 * @param id3
-	 * @param msg
-	 * @return
-	 */
-	function checkSpanOtherRadio(id,id2,id3,msg){
-		var other="";
-		if($(id3)!=null && $(id3).value!=''){
-			other=$(id3).value;
-		}
-		if($(id)!=null && $(id2)!=null && $(id3)!=null){
-			if(checkRadioCheck(id)==false && other==""){
-				$(id2).style.backgroundColor="FF0000";
-				$(id3).style.borderColor="red";
-				return false;
-			}else{
-				$(id2).style.backgroundColor="";
-				$(id3).style.borderColor="";
-				return true;
-			}
-		}
-		return true;
-	}
+
 	//商业资料 基本信息
 	function verifyBs(){
-		for(var i=1;i<=bs;i++){
-			if(!selectJudge("BS_UNIT_KIND_"+i+"","商业资料-单位性质不能留空")) return false;
-			if(!selectJudge("BS_INDUSTRY_"+i+"","商业资料-所属行业不能留空")) return false;
-			if(!selectJudge("BS_WORK_LEVEL_"+i+"","商业资料-工作级别不能留空")) return false;
-			if(!checkSpanRadio("BS_IS_SELF_EMPLOYED_"+i+"","SPAN_IS_SELF_EMPLOYED_"+i+"","商业资料-是否自雇人士不能留空")) return false; 
-			if(!notnull("BS_BASE_SALARY_"+i+"","商业资料-基本薪金不能留空")) return false;
-			if($('BS_BASE_SALARY_'+i+'')!=null && $('BS_BASE_SALARY_'+i+'').value!=''){
-				if(!notnull("BS_PAY_PATTERN_"+i+"","商业信息-支付方式不能留空")) return false;
+			if(!selectJudge("UNIT_KIND","商业资料-单位性质不能留空")) return false;
+			if(!selectJudge("INDUSTRY","商业资料-所属行业不能留空")) return false;
+			if(!checkSpanRadio("BS_IS_SELF_EMPLOYED","SPAN_IS_SELF_EMPLOYED","商业资料-是否自雇人士不能留空")) return false; 
+			if(!notnull("BS_BASE_SALARY","商业资料-基本薪金不能留空")) return false;
+			if($('BS_BASE_SALARY')!=null && $('BS_BASE_SALARY_'+i+'').value!=''){
+				if(!notnull("BS_PAY_PATTERN","商业信息-支付方式不能留空")) return false;
 			}
-			if($("BS_TEL_AREA_"+i+"")!=null && $("BS_TEL_AREA_"+i+"").value!=""){
-			 	if(!notnull("BS_TEL_NUMBER_"+i+"","商业资料-区号填写,商业资料-号码不能留空")) return false;
+			if($("BS_TEL_AREA")!=null && $("BS_TEL_AREA").value!=""){
+			 	if(!notnull("BS_TEL_NUMBER","商业资料-区号填写,商业资料-号码不能留空")) return false;
 			}
-			if($("BS_TEL_NUMBER_"+i+"")!=null && $("BS_TEL_NUMBER_"+i+"").value!=""){
-			 	if(!notnull("BS_TEL_AREA_"+i+"","商业资料-号码填写,商业资料-区号不能留空")) return false;
+			if($("BS_TEL_NUMBER")!=null && $("BS_TEL_NUMBER").value!=""){
+			 	if(!notnull("BS_TEL_AREA","商业资料-号码填写,商业资料-区号不能留空")) return false;
 			}
-		}
 		return true ;
 	}
 	//商业资料 公司地址不为空时 地址、省、市、区、邮政编码、公司电话、服务年数、职务、是否公司东主不能留空
@@ -392,8 +308,6 @@ function notnull(id,msg){
 				if(!selectJudge("BS_ADDRESS_AREA_"+i+"","公司名称不为空时,区不能留空")) return false;
 				if(!notnull("BS_ADDRESS_DETAIL_"+i+"","公司名称不为空时,地址不能留空")) return false;
 				if(!notnull("BS_POST_CODE_"+i+"","公司名称不为空时,邮政编码不能留空")) return false;
-				//if(!notnull("BS_TEL_AREA_"+i+"","公司名称不为空时,公司电话-区号不能留空")) return false;
-				//if(!notnull("BS_TEL_NUMBER_"+i+"","公司名称不为空时,公司电话-主机号不能留空")) return false;
 				if(!notnull("BS_SERVICE_YEARS_"+i+"","公司名称不为空时,服务年数年不能留空")) return false;
 				if(!notnull("BS_SERVICE_MONTHS_"+i+"","公司名称不为空时,服务年数月不能留空")) return false;
 				if(!notnull("BS_POSITION_"+i+"","公司名称不为空时,职务不能留空")) return false;

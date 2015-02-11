@@ -34,6 +34,7 @@ public class GU_PRODUCT_INFO {
 
 	@ManyToOne(targetEntity = GU_FUNDER_INFO.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "funder")
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	private GU_FUNDER_INFO funder;
 	@Column(length = 10)
 	private String product_code;

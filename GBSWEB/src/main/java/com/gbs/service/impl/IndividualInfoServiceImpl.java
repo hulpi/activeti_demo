@@ -125,9 +125,10 @@ public class IndividualInfoServiceImpl implements IndividualInfoService {
 		}else{
 			apply_gu_individual_info = individual_info_db;
 		}
-		
+		if(applyInfo.getGuarant_id()!=null){
 		//申请担保生成
 		applyInfoService.addIndividualApplyInfo(applyInfo,apply_gu_individual_info,userDto);
+		}
 	}
 	
 	
@@ -169,8 +170,9 @@ public class IndividualInfoServiceImpl implements IndividualInfoService {
 		}else{
 			apply_gu_enterprise_info = gu_enterprise_info_db;
 		}
-		
-		applyInfoService.addEnterpriseApplyInfo(applyInfo, apply_gu_enterprise_info,userDto);
+		if(applyInfo.getGuarant_id()!=null){
+		 applyInfoService.addEnterpriseApplyInfo(applyInfo, apply_gu_enterprise_info,userDto);
+		}
 	}
 
 	public void updateIndividualInfo(GU_INDIVIDUAL_INFO individual) {

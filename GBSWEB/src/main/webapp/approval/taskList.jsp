@@ -54,7 +54,7 @@
 					<td>6</td>
 					<td>
 						<c:if test="${empty task.assignee }">
-							<a class="claim" href="${ctx }/approval/task/claim/${task.taskId}/${action}">签收</a>
+							<a class="claim" href="${ctx }/approval/task/claim/${task.taskId}/${action}/${applyInfo.guarant_id}">签收</a>
 						</c:if>
 						<c:if test="${not empty task.assignee }">
 							<a class="handle" tkey='${action}' tname='${task.name }' href="#" >办理</a>
@@ -125,6 +125,3 @@
 
 </body>
 </html>
-<script type="text/javascript">
-
-</script>

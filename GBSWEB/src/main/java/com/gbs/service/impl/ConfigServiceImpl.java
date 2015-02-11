@@ -33,5 +33,31 @@ public class ConfigServiceImpl implements ConfigService {
 	public List<GU_CONFIG_INFO> getProductType() {
 		return configDao.getConfigInfo(ConfigInfoKey.PRODUCT_TYPE);
 	}
+	
+	public String getProductTypeDes(String productType){
+		String productTypeDes = "";
+		List<GU_CONFIG_INFO> ptList = getProductType();
+		if(ptList != null && ptList.size()>0){
+			for(GU_CONFIG_INFO gu_config_info : ptList){
+				if(productType.equals(gu_config_info.getInfo_code())){
+					productTypeDes = gu_config_info.getInfo_name();
+				}
+			}
+		}
+		return productTypeDes;
+	}
+	
+	public String getLoanPurposeDes(String loanPurpose){
+		String loanPurposeDes = "";
+		List<GU_CONFIG_INFO> lpList = getLoanPurpose();
+		if(lpList != null && lpList.size()>0){
+			for(GU_CONFIG_INFO gu_config_info : lpList){
+				if(loanPurpose.equals(gu_config_info.getInfo_code())){
+					loanPurposeDes = gu_config_info.getInfo_name();
+				}
+			}
+		}
+		return loanPurposeDes;
+	}
 
 }

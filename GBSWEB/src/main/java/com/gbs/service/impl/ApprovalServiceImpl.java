@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.support.ResourcePropertySource;
 import org.springframework.stereotype.Service;
 
+import com.gbs.constant.ApplyStatus;
 import com.gbs.dao.ApplyInfoDao;
 import com.gbs.dto.APPLY_INFO_DTO;
 import com.gbs.dto.ApprovalInfoDto;
@@ -182,9 +183,15 @@ public final class ApprovalServiceImpl implements ApprovalService {
         }
     }
     
-    public void claimTask(String userId, String taskId) {
+    public void claimTask(String userId, String taskId, String action, String guaranId) {
         try {
             port.claimTask(userId, taskId);
+            
+            String status = ApplyStatus.statusMap.get(action);
+            if(status != null) {
+            	applyInfoDao.updateStatus(guaranId, status);
+            }
+            
 
         } catch (Exception_Exception e) { 
         	throw new RuntimeException(e);
@@ -193,7 +200,7 @@ public final class ApprovalServiceImpl implements ApprovalService {
         
     }
     
-    public void completeTask(String userId, String taskId, Map<String, Object> variables) {
+    public void completeTask(String userId, String taskId, String guaranId, String status, Map<String, Object> variables) {
         MapEntityArray entityArray = new MapEntityArray();
         if(variables != null) {
         	for(String key : variables.keySet()) {
@@ -209,6 +216,10 @@ public final class ApprovalServiceImpl implements ApprovalService {
         try {
         	
             port.completeTask(userId, taskId, entityArray);
+            
+            if(guaranId != null) {
+            	applyInfoDao.updateStatus(guaranId, status);
+            }
 
         } catch (Exception_Exception e) { 
         	throw new RuntimeException(e);
@@ -218,10 +229,11 @@ public final class ApprovalServiceImpl implements ApprovalService {
     
     private APPLY_INFO_DTO assembleApplyInfoDTO (GU_APPLY_INFO applyInfo) {
     	APPLY_INFO_DTO applyInfoDto = new APPLY_INFO_DTO();
+    	
     	applyInfoDto.setGuarant_id(applyInfo.getGuarant_id());
 		applyInfoDto.setGuarant_amt(applyInfo.getGuarant_amt().toString());
 		applyInfoDto.setLoan_purpose(applyInfo.getLoan_purpose());
-		//applyInfoDto.setProductSel(applyInfo.getProduct().getProduct_desc());
+		applyInfoDto.setProductSel(applyInfo.getProduct().getProduct_desc());
 		applyInfoDto.setGuarant_time_limit(applyInfo.getGuarant_time_limit().toString());
 		
 		return applyInfoDto;
@@ -229,7 +241,7 @@ public final class ApprovalServiceImpl implements ApprovalService {
     
     public APPLY_INFO_DTO findApplyInfo(String guaranId) throws Exception {
     	APPLY_INFO_DTO applyInfoDto = new APPLY_INFO_DTO();
-    	GU_APPLY_INFO applyInfo = applyInfoDao.queryApplyInfo(guaranId);
+    	GU_APPLY_INFO applyInfo = applyInfoDao.getApplyInfoByGuarantId(guaranId);
     	if(applyInfo != null) {
     		logger.debug("guarant id = " + applyInfo.getGuarant_id());
     		logger.debug("guarant amount = " + applyInfo.getGuarant_amt());

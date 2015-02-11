@@ -48,10 +48,7 @@
 			<td>购买价格：</td>
 			<td><input type="text" id="BUY_PRICE"
 				name="hostInfo[0].BUY_PRICE" value="${house.BUY_PRICE}"
-				style="width: 100px; ime-mode: Disabled;" maxlength="13"
-				onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))"
-				onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))"
-				ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" /></td>
+				style="width: 100px; ime-mode: Disabled;" maxlength="13"/></td>
 			<td>查询日期：</td>
 			<td><input type="text" id="SEARCH_DATE"
 				name="hostInfo[0].SEARCH_DATE" class="Wdate"
@@ -64,27 +61,16 @@
 			<td><input type="text" id="BUILT_YEAR"
 				name="hostInfo[0].BUILT_YEAR" value="${house.BUILT_YEAR}"
 				maxlength="4" style="width: 100px; ime-mode: Disabled;"
-				maxlength="4"
-				onkeypress="return regInput(this,/^[0-9]*$/,String.fromCharCode(event.keyCode))"
-				onpaste="return regInput(this,/^[0-9]*$/,window.clipboardData.getData('Text'))"
-				ondrop="return regInput(this,/^[0-9]*$/,event.dataTransfer.getData('Text'))" /></td>
+				maxlength="4"/></td>
 			<td>建筑面积：</td>
 			<td><input type="text" id="FLOOR_AREA"
 				name="hostInfo[0].FLOOR_AREA}" value="${house.FLOOR_AREA}"
-				onkeyup="countHsTotalPrice('HS_SEARCH_UNIT_PRICE','HS_FLOOR_AREA','HS_SEARCH_TOTAL_PRICE')"
-				maxlength="13" style="width: 100px; ime-mode: Disabled;"
-				onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))"
-				onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))"
-				ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" />平方米</td>
+				maxlength="13" style="width: 100px; ime-mode: Disabled;" />平方米</td>
 			<td>查询单价：</td>
 			<td><input type="text" id="SEARCH_UNIT_PRICE"
 				name="hostInfo[0].SEARCH_UNIT_PRICE"
 				value="${house.SEARCH_UNIT_PRICE}"
-				style="width: 100px; ime-mode: Disabled;" maxlength="13"
-				onkeyup="countHsTotalPrice('HS_SEARCH_UNIT_PRICE','HS_FLOOR_AREA','HS_SEARCH_TOTAL_PRICE')"
-				onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))"
-				onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))"
-				ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" /></td>
+				style="width: 100px; ime-mode: Disabled;" maxlength="13"/></td>
 		</tr>
 		<tr>
 			<td>按揭银行：</td>
@@ -95,43 +81,28 @@
 			<td><input type="text" id="LOAN_LIMIT_YEAR"
 				name="hostInfo[0].LOAN_LIMIT_YEAR"
 				value="${house.LOAN_LIMIT_YEAR}" maxlength="3"
-				style="width: 100px; ime-mode: Disabled;"
-				onkeypress="return regInput(this,/^[0-9]*$/,String.fromCharCode(event.keyCode))"
-				onpaste="return regInput(this,/^[0-9]*$/,window.clipboardData.getData('Text'))"
-				ondrop="return regInput(this,/^[0-9]*$/,event.dataTransfer.getData('Text'))" /></td>
+				style="width: 100px; ime-mode: Disabled;"/></td>
 			<td>查询总价：</td>
 			<td><input type="text" id="SEARCH_TOTAL_PRICE"
 				name="hostInfo[0].SEARCH_TOTAL_PRICE"
 				value="${house.SEARCH_TOTAL_PRICE}" maxlength="22"
-				style="width: 100px; ime-mode: Disabled;"
-				onkeypress="return regInput(this,/^[0-9]*$/,String.fromCharCode(event.keyCode))"
-				onpaste="return regInput(this,/^[0-9]*$/,window.clipboardData.getData('Text'))"
-				ondrop="return regInput(this,/^[0-9]*$/,event.dataTransfer.getData('Text'))" /></td>
+				style="width: 100px; ime-mode: Disabled;"/></td>
 		</tr>
 		<tr>
 			<td>贷款总额：</td>
 			<td><input type="text" id="LOAN_TOTAL_AMOUNT"
 				name="hostInfo[0].LOAN_TOTAL_AMOUNT"
 				value="${house.LOAN_TOTAL_AMOUNT}"
-				style="width: 100px; ime-mode: Disabled;" maxlength="13"
-				onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))"
-				onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))"
-				ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" /></td>
+				style="width: 100px; ime-mode: Disabled;" maxlength="13" /></td>
 			<td>尚欠余额：</td>
 			<td><input type="text" id="BALANCE_DUE"
 				name="hostInfo[0].BALANCE_DUE" value="${house.BALANCE_DUE}"
-				style="width: 100px; ime-mode: Disabled;" maxlength="13"
-				onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))"
-				onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))"
-				ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" /></td>
+				style="width: 100px; ime-mode: Disabled;" maxlength="13" /></td>
 			<td>每月供款：</td>
 			<td><input type="text" id="MONTHLY_CONTRIBUTION"
 				name="hostInfo[0].MONTHLY_CONTRIBUTION"
 				value="${house.MONTHLY_CONTRIBUTION}"
-				style="width: 100px; ime-mode: Disabled;" maxlength="13"
-				onkeypress="return regInput(this,/^\d*\.?\d{0,2}$/,String.fromCharCode(event.keyCode))"
-				onpaste="return regInput(this,/^\d*\.?\d{0,2}$/,window.clipboardData.getData('Text'))"
-				ondrop="return regInput(this,/^\d*\.?\d{0,2}$/,event.dataTransfer.getData('Text'))" /></td>
+				style="width: 100px; ime-mode: Disabled;" maxlength="13"/></td>
 		</tr>
 		<tr>
 			<td>房产用途：</td>

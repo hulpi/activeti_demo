@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.gbs.dto.APPLY_INFO_DTO;
 import com.gbs.dto.INDIVIDUAL_INFO_DTO;
+import com.gbs.dto.UiApplyInfoDto;
 import com.gbs.dto.UserInfoDto;
 import com.gbs.entity.GU_APPLY_INFO;
 import com.gbs.entity.GU_ENTERPRISE_INFO;
 import com.gbs.entity.GU_INDIVIDUAL_INFO;
+import com.gbs.util.Page;
 
 /**
  * 申请单操作 服务层
@@ -42,5 +44,24 @@ public interface ApplyInfoService {
 	 * @param APPLY_INFO_DTO
 	 */
 	public void updateApplyInfo(APPLY_INFO_DTO apply_info_dto);
+	
+	/**
+	 * 查询申请单的信息
+	 * @param dto
+	 * @return
+	 */
+	public List<UiApplyInfoDto> getApplyInfoList(APPLY_INFO_DTO dto,Page page);
+	
+	/**
+	 * 查询申请单的总数
+	 * @param dto
+	 * @return
+	 */
+	public int getApplyInfoCount(APPLY_INFO_DTO dto);
+	
+	/**
+	 * 确认申请单
+	 */
+	public void confirmApply(String guarant_id,String userid) throws Exception ;
 	
 }

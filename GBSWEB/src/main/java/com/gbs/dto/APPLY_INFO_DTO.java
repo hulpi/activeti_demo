@@ -1,8 +1,11 @@
 package com.gbs.dto;
 
+import java.util.Date;
 import java.util.Map;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import com.ibm.rules.decisionservice.gbs_rule.gbs_dc.ResponseInfo;
+
 
 
 public class APPLY_INFO_DTO {
@@ -23,6 +26,10 @@ public class APPLY_INFO_DTO {
 	private Map<String, Object> variables;
 	
 	private String ecm_barcode;//影像CODE
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date from_apply_date;//申请日期起始
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date to_apply_date;//申请日期终止 
 	
 	private String userId;
 	
@@ -105,6 +112,18 @@ public class APPLY_INFO_DTO {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public Date getFrom_apply_date() {
+		return from_apply_date;
+	}
+	public void setFrom_apply_date(Date from_apply_date) {
+		this.from_apply_date = from_apply_date;
+	}
+	public Date getTo_apply_date() {
+		return to_apply_date;
+	}
+	public void setTo_apply_date(Date to_apply_date) {
+		this.to_apply_date = to_apply_date;
 	}
 	public Map<String, Object> getVariables() {
 		return variables;
